@@ -17,25 +17,17 @@ jobs:
       - name: Fetch ProtonVPN server data and create CSV
         shell: pwsh
         run: |
-          # Define the URL
           $jsonUrl = "https://api.protonmail.ch/vpn/logicals"
-
-          # Fetch the JSON data from the URL
+          
           $jsonData = Invoke-RestMethod -Uri $jsonUrl -ContentType "application/json"
-
-          # Initialize an array to hold the CSV data
+          
           $csvObjects = @()
-
-          # Iterate over each 'LogicalServer' in the JSON data
+          
           foreach ($logicalServer in $jsonData.LogicalServers) {
               $city = $logicalServer.City
               $exitCountry = $logicalServer.ExitCountry
-              # Iterate over each 'Server' in the 'Servers' array
               foreach ($server in $logicalServer.Servers) {
-                  # Convert ServicesDown to boolean
                   $servicesDownBool = $server.ServicesDown -eq 1
-
-                  # Create a custom object for each server with the desired properties
                   $csvObjects += [PSCustomObject]@{
                       ExitIP = $server.ExitIP
                       ServicesDown = $servicesDownBool
@@ -45,17 +37,8 @@ jobs:
               }
           }
 
-          # Convert the array of CSV objects to CSV format
           $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
-
-          # Define the path for the CSV file
-          $csvPath = "${{ github.workspace }}/vpn_servers_info.csv"
-
-          # Save the CSV data to a file
-          $csvData | Out-File -FilePath $csvPath
-
-          # Output the path to the CSV file
-          Write-Host "CSV file created at: $csvPath"
+          $csvPath = "${{ github.workspace }}/ExternalData/vpn_servers_info.csv" -Force
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
