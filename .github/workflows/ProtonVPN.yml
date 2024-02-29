@@ -35,10 +35,9 @@ jobs:
               }
           }
           
-          $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
-          
+          $sortedCsvObjects = $csvObjects | Sort-Object { [version] $_.ExitIP }        
+          $csvData = $sortedCsvObjects | ConvertTo-Csv -NoTypeInformation
           $csvData = $csvData -replace '"', ''
-          
           $csvPath = Join-Path ${{ github.workspace }} "/ExternalData/ProtonVPNExitNodes.csv"
           $csvData | Out-File -FilePath $csvPath -Encoding utf8
 
