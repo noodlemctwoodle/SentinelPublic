@@ -38,7 +38,7 @@ jobs:
           }
 
           $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
-          $csvPath = "${{ github.workspace }}/ExternalData/vpn_servers_info.csv" -Force
+          $csvPath = "${{ github.workspace }}/ExternalData/vpn_servers_info.csv"
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
