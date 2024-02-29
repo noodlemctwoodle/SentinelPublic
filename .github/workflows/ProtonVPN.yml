@@ -35,14 +35,11 @@ jobs:
               }
           }
           
-          # Convert the array of objects to a CSV string
           $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
           
-          # Remove the quotes around each element
           $csvData = $csvData -replace '"', ''
           
-          # Save the CSV data to a file
-          $csvPath = Join-Path $env:GITHUB_WORKSPACE "ExternalData/ProtonVPNExitNodes.csv"
+          $csvPath = ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv
           $csvData | Out-File -FilePath $csvPath -Encoding utf8
 
       - name: Commit updated CSV to repo
