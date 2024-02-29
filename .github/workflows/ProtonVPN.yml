@@ -39,7 +39,7 @@ jobs:
           
           $csvData = $csvData -replace '"', ''
           
-          $csvPath = ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv
+          $csvPath = Join-Path ${{ github.workspace }} "/ExternalData/ProtonVPNExitNodes.csv"
           $csvData | Out-File -FilePath $csvPath -Encoding utf8
 
       - name: Commit updated CSV to repo
