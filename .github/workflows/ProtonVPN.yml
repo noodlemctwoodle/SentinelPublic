@@ -18,9 +18,7 @@ jobs:
         shell: pwsh
         run: |
           $jsonUrl = "https://api.protonmail.ch/vpn/logicals"
-          
           $jsonData = Invoke-RestMethod -Uri $jsonUrl -ContentType "application/json"
-          
           $csvObjects = @()
           
           foreach ($logicalServer in $jsonData.LogicalServers) {
@@ -36,10 +34,16 @@ jobs:
                   }
               }
           }
-
+          
+          # Convert the array of objects to a CSV string
           $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
-
-          $csvData | Export-Csv -Path ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv
+          
+          # Remove the quotes around each element
+          $csvData = $csvData -replace '"', ''
+          
+          # Save the CSV data to a file
+          $csvPath = Join-Path $env:GITHUB_WORKSPACE "ExternalData/ProtonVPNExitNodes.csv"
+          $csvData | Out-File -FilePath $csvPath -Encoding utf8
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
