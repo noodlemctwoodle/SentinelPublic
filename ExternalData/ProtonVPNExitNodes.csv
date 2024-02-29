@@ -302,28 +302,6 @@ ExitIP,ServicesDown,City,ExitCountry
 84.17.63.14,False,Denver,US
 84.17.63.15,False,Denver,US
 84.17.63.16,False,Denver,US
-84.17.63.56,False,,US
-84.17.63.12,False,,US
-89.187.171.243,False,,US
-185.230.126.150,False,,US
-193.148.18.86,False,,US
-89.187.170.163,False,,US
-89.187.175.137,False,,US
-89.187.178.174,False,,US
-89.187.180.42,False,,US
-89.45.4.3,False,,US
-146.70.174.131,False,,US
-146.70.174.147,False,,US
-146.70.174.163,False,,US
-146.70.174.179,False,,US
-146.70.174.195,False,,US
-146.70.174.83,False,,US
-146.70.174.211,False,,US
-146.70.147.115,False,,US
-146.70.174.227,False,,US
-146.70.174.243,False,,US
-146.70.183.19,False,,US
-104.234.212.2,False,,US
 195.80.150.227,False,Ljubljana,SI
 195.80.150.228,False,Ljubljana,SI
 195.80.150.229,False,Ljubljana,SI
@@ -2269,6 +2247,14 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.202.163,False,New York City,US
 146.70.202.164,False,New York City,US
 146.70.202.165,False,New York City,US
+149.102.226.226,False,,US
+146.70.202.51,False,,US
+146.70.202.67,False,,US
+146.70.202.99,False,,US
+146.70.202.131,False,,US
+169.150.254.33,False,,US
+74.63.204.211,False,,US
+149.102.224.163,False,,US
 146.70.202.166,False,New York City,US
 146.70.202.167,False,New York City,US
 146.70.202.168,False,New York City,US
