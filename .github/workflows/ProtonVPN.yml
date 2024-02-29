@@ -3,7 +3,7 @@ name: Pull external data source Proton VPN Server Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */24 * * *'
+    - cron: '0 0 */1 * *'
 
 jobs:
   pull-protonvpn-data:
