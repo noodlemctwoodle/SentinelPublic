@@ -37,20 +37,9 @@ jobs:
               }
           }
 
-          # Convert the array of objects to a CSV string
-          $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation -Delimiter ","
-
-          # Ensure the ExternalData directory exists
-          $externalDataPath = Join-Path ${{ github.workspace }} "ExternalData"
-          if (-not (Test-Path -Path $externalDataPath)) {
-            New-Item -ItemType Directory -Path $externalDataPath -ErrorAction SilentlyContinue
-          }
-
-          # Define the full path for the CSV file
-          $csvFilePath = Join-Path $externalDataPath "ProtonVPNExitNodes.csv"
-
-          # Save the CSV data to a file
-          $csvData | Out-File -FilePath $csvFilePath -Force -Encoding utf8
+          $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
+          if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
+          $csvData | Export-Csv -Path ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv -Force
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
