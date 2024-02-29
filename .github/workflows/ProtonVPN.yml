@@ -38,8 +38,8 @@ jobs:
           }
 
           $csvData = $csvObjects | ConvertTo-Csv -NoTypeInformation
-          if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
-          $csvData | Export-Csv -Path ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv -Force
+
+          $csvData | Export-Csv -Path ${{ github.workspace }}/ExternalData/ProtonVPNExitNodes.csv
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
