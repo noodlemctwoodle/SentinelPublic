@@ -20,11 +20,14 @@ jobs:
           $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel' and (location eq 'UK South' or location eq 'UK West')"
           $response = Invoke-RestMethod -Uri $apiUrl -Method Get
           $items = $response.Items
-          $selectedItems = $items | Select-Object currencyCode, tierMinimumUnits, retailPrice, unitPrice, armRegionName, location, effectiveStartDate, meterId, meterName, productId, skuId, productName, skuName, serviceName, serviceId, serviceFamily, unitOfMeasure, type, isPrimaryMeterRegion, armSkuName
+          $sortedItems = $items | Sort-Object location, skuName
+          $selectedItems = $sortedItems | Select-Object currencyCode, tierMinimumUnits, retailPrice, unitPrice, armRegionName, location, effectiveStartDate, meterId, meterName, productId, skuId, productName, skuName, serviceName, serviceId, serviceFamily, unitOfMeasure, type, isPrimaryMeterRegion, armSkuName
+          
           $csvFilePath = "UKSentinelPrices.csv"
+          
           if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
           $selectedItems | Export-Csv -Path ${{ github.workspace }}/ExternalData/$csvFilePath -Force
-
+          
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
