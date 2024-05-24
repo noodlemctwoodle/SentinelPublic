@@ -1,0 +1,43 @@
+name: Pull external data source Proton VPN Server Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 */1 * *'
+
+jobs:
+  pull-protonvpn-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+
+      - name: Fetch ProtonVPN server data and create CSV
+        shell: pwsh
+        run: |
+          # Define the API endpoint
+          $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel' and (location eq 'UK South' or location eq 'UK West')"
+          
+          # Query the API
+          $response = Invoke-RestMethod -Uri $apiUrl -Method Get
+          
+          # Extract the 'Items' array from the response
+          $items = $response.Items
+          
+          # Select specific fields to include in the CSV
+          $selectedItems = $items | Select-Object currencyCode, tierMinimumUnits, retailPrice, unitPrice, armRegionName, location, effectiveStartDate, meterId, meterName, productId, skuId, productName, skuName, serviceName, serviceId, serviceFamily, unitOfMeasure, type, isPrimaryMeterRegion, armSkuName
+          
+          # Export the selected items to a CSV file
+          $csvFilePath = "output.csv"
+          $selectedItems | Export-Csv -Path $csvFilePath -NoTypeInformation
+          
+          # Print a message indicating where the CSV file has been saved
+          Write-Host "Data has been exported to $csvFilePath"
+
+
+      - name: Commit updated CSV to repo
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update VPN server data CSV
