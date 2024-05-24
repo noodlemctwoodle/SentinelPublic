@@ -31,11 +31,10 @@ jobs:
           
           # Export the selected items to a CSV file
           $csvFilePath = "output.csv"
-          $selectedItems | Export-Csv -Path $csvFilePath -NoTypeInformation
-          
-          # Print a message indicating where the CSV file has been saved
-          Write-Host "Data has been exported to $csvFilePath"
-
+          #$selectedItems | Export-Csv -Path $csvFilePath -NoTypeInformation
+        
+          if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
+          $selectedItems | Export-Csv -Path ${{ github.workspace }}/ExternalData/$csvFilePath -Force
 
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
