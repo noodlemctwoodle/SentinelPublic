@@ -21,7 +21,7 @@ jobs:
           $response = Invoke-RestMethod -Uri $apiUrl -Method Get
           $items = $response.Items
           $sortedItems = $items | Sort-Object location, skuName
-          $selectedItems = $sortedItems | Select-Object currencyCode, tierMinimumUnits, retailPrice, unitPrice, armRegionName, location, effectiveStartDate, meterId, meterName, productId, skuId, productName, skuName, serviceName, serviceId, serviceFamily, unitOfMeasure, type, isPrimaryMeterRegion, armSkuName
+          $selectedItems = $sortedItems | Select-Object tierMinimumUnits, retailPrice, unitPrice, currencyCode, location, effectiveStartDate, meterId, meterName, skuId, productName, skuName, serviceFamily, unitOfMeasure, type
           
           $csvFilePath = "UKSentinelPrices.csv"
           
