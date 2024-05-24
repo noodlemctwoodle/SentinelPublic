@@ -6,7 +6,7 @@ on:
     - cron: '0 0 */1 * *'
 
 jobs:
-  pull-protonvpn-data:
+  pull-sentinel-prices:
     runs-on: ubuntu-latest
     permissions:
       contents: write
