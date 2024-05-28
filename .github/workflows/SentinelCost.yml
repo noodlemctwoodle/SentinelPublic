@@ -30,7 +30,7 @@ jobs:
           $selectedItems | Export-Csv -Path ${{ github.workspace }}/ExternalData/$csvFilePath -Force
 
           if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
-          $selectedItems | ConvertTo-Json -Depth 99 -Path ${{ github.workspace }}/ExternalData/$jsonFilePath -Force          
+          $selectedItems | ConvertTo-Json -Depth 99 ${{ github.workspace }}/ExternalData/$jsonFilePath -Force          
           
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
