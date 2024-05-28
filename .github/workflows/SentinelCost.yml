@@ -14,7 +14,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v3
 
-      - name: Fetch Sentinel Prices data and create CSV
+      - name: Fetch Microsoft Sentinel Prices and create CSV
         shell: pwsh
         run: |
           $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel' and (location eq 'UK South' or location eq 'UK West')"
@@ -31,4 +31,4 @@ jobs:
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: Update VPN server data CSV
+          commit_message: Update Microsoft Sentinel Prices CSV
