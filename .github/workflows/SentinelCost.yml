@@ -26,11 +26,15 @@ jobs:
           $csvFilePath = "UKSentinelPrices.csv"
           $jsonFilePath = "UKSentinelPrices.json"
           
-          if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
-          $selectedItems | Export-Csv -Path ${{ github.workspace }}/ExternalData/$csvFilePath -Force
-
-          if (-not (Test-Path -Path "${{ github.workspace }}/ExternalData/")) { New-Item -ItemType Directory -Path "${{ github.workspace }}/ExternalData/" -ErrorAction SilentlyContinue }
-          $selectedItems | ConvertTo-Json -Depth 99 ${{ github.workspace }}/ExternalData/$jsonFilePath -Force          
+          $externalDataPath = "${{ github.workspace }}/ExternalData/"
+          if (-not (Test-Path -Path $externalDataPath)) { 
+              New-Item -ItemType Directory -Path $externalDataPath -ErrorAction SilentlyContinue 
+          }
+          
+          $selectedItems | Export-Csv -Path "$externalDataPath$csvFilePath" -Force
+          
+          $jsonContent = $selectedItems | ConvertTo-Json -Depth 99
+          $jsonContent | Out-File -FilePath "$externalDataPath$jsonFilePath" -Force 
           
       - name: Commit updated CSV to repo
         uses: stefanzweifel/git-auto-commit-action@v5
