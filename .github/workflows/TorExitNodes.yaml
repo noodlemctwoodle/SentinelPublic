@@ -18,28 +18,33 @@ jobs:
         shell: pwsh
         run: |
           $torExitNodesUrl = "https://check.torproject.org/torbulkexitlist"
+          $outputCsvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
           
-          $response = Invoke-WebRequest -Uri $torExitNodesUrl
-          if ($response.StatusCode -eq 200) {
-              $content = [System.Text.Encoding]::UTF8.GetString($response.Content)
-              $exitNodeIPs = @()
-          
-              foreach ($line in $content -split "`n") {
-                  if ($line.Trim() -ne "") {
-                      $exitNodeIPs += [PSCustomObject]@{ TorExitNodes = $line.Trim() }
+          try {
+              $response = Invoke-WebRequest -Uri $torExitNodesUrl
+              if ($response.StatusCode -eq 200) {
+                  $content = [System.Text.Encoding]::UTF8.GetString($response.Content)
+                  $exitNodeIPs = @()
+              
+                  foreach ($line in $content -split "`n") {
+                      if ($line.Trim() -ne "") {
+                          $exitNodeIPs += [PSCustomObject]@{ TorExitNodes = $line.Trim() }
+                      }
                   }
-              }
-          
-              if ($exitNodeIPs.Count -gt 0) {
-                  $csvContent = "TorExitNodes`n" + ($exitNodeIPs | ForEach-Object { $_.TorExitNodes }) -join "`n"
-                  $csvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
-                  Set-Content -Path $csvPath -Value $csvContent -Force -Encoding UTF8
-                  Write-Output "TOR exit nodes have been saved to $csvPath"
+              
+                  if ($exitNodeIPs.Count -gt 0) {
+                      $csvContent = "TorExitNodes`n" + ($exitNodeIPs | ForEach-Object { $_.TorExitNodes }) -join "`n"
+                      $csvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
+                      Set-Content -Path $csvPath -Value $csvContent -Force -Encoding UTF8
+                      Write-Output "TOR exit nodes have been saved to $csvPath"
+                  } else {
+                      Write-Error "No IP addresses were found."
+                  }
               } else {
-                  Write-Error "No IP addresses were found."
+                  Write-Error "Failed to fetch the TOR exit nodes. Status code: $($response.StatusCode)"
               }
-          } else {
-              Write-Error "Failed to fetch the TOR exit nodes. Status code: $($response.StatusCode)"
+          } catch {
+              Write-Error "An error occurred while fetching the TOR exit nodes: $_"
           }
 
       - name: Commit updated data to repo
