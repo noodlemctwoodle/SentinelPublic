@@ -18,34 +18,33 @@ jobs:
         shell: pwsh
         run: |
           $torExitNodesUrl = "https://check.torproject.org/torbulkexitlist"
-          $outputCsvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
+          $outputJsonPath = "${{ github.workspace }}/ExternalData/TorExitNodes.json"
           
-          $response = Invoke-WebRequest -Uri $torExitNodesUrl
-          if ($response.StatusCode -eq 200) {
-          
-              $content = $response.Content
-              $contentString = [System.Text.Encoding]::UTF8.GetString($content)
-              $exitNodeIPs = @()
+          try {
+              $response = Invoke-WebRequest -Uri $torExitNodesUrl
+              if ($response.StatusCode -eq 200) {
+                  $content = [System.Text.Encoding]::UTF8.GetString($response.Content)
+                  $exitNodeIPs = @()
               
-              $lines = $contentString -split "`n"
-
-              foreach ($line in $lines) {
-                  if ($line.Trim() -ne "") {
-                      # Add the IP address to the array
-                      $exitNodeIPs += [PSCustomObject]@{
-                          TorExitnodes = $line.Trim()  # Renamed column here
+                  foreach ($line in $content -split "`n") {
+                      if ($line.Trim() -ne "") {
+                          $exitNodeIPs += $line.Trim()
                       }
                   }
-              }
-          
-              # Output the array to a CSV file
-              if ($exitNodeIPs.Count -gt 0) {
-                  $exitNodeIPs | Export-Csv -Path $outputCsvPath -NoTypeInformation
-                  Write-Output "TOR exit nodes have been saved to $outputCsvPath"
+              
+                  $customObject = [PSCustomObject]@{
+                      TorExitNodes = $exitNodeIPs
+                  }
+
+                  $jsonContent = $customObject | ConvertTo-Json
+                  Set-Content -Path $outputJsonPath -Value $jsonContent -Force -Encoding UTF8
+                  Write-Output "TOR exit nodes have been saved to $outputJsonPath"
               } else {
-                  Write-Error "No IP addresses were found."
+                  Write-Error "Failed to fetch the TOR exit nodes. Status code: $($response.StatusCode)"
               }
-          } 
+          } catch {
+              Write-Error "An error occurred while fetching the TOR exit nodes: $_"
+          }
 
       - name: Commit updated data to repo
         uses: stefanzweifel/git-auto-commit-action@v5
