@@ -33,7 +33,7 @@ jobs:
               if ($exitNodeIPs.Count -gt 0) {
                   $csvContent = "TorExitNodes`n" + ($exitNodeIPs | ForEach-Object { $_.TorExitNodes }) -join "`n"
                   $csvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
-                  Set-Content -Path $csvPath -Value $csvContent -Force
+                  Set-Content -Path $csvPath -Value $csvContent -Force -Encoding UTF8
                   Write-Output "TOR exit nodes have been saved to $csvPath"
               } else {
                   Write-Error "No IP addresses were found."
