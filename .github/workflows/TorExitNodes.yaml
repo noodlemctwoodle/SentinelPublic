@@ -1,0 +1,44 @@
+name: Pull external data source TOR Exit Nodes
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "0 0 */1 * *"
+
+jobs:
+  pull-external-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+
+      - name: Pull external data and modify if needed
+        shell: pwsh
+        run: |
+          $torExitNodesUrl = "https://check.torproject.org/torbulkexitlist"
+          
+          $response = Invoke-WebRequest -Uri $torExitNodesUrl
+          if ($response.StatusCode -eq 200) {
+              $content = [System.Text.Encoding]::UTF8.GetString($response.Content)
+              $exitNodeIPs = @()
+          
+              foreach ($line in $content -split "`n") {
+                  if ($line.Trim() -ne "") {
+                      $exitNodeIPs += [PSCustomObject]@{ TorExitNodes = $line.Trim() }
+                  }
+              }
+          
+              if ($exitNodeIPs.Count -gt 0) {
+              
+                  $csvContent = "TorExitNodes`n" + ($exitNodeIPs | ForEach-Object { $_.TorExitNodes }) -join "`n"
+                  Set-Content -Path ${{ github.workspace }}/ExternalData/TorExitNodes.csv -Value $csvContent
+              } else {
+                  Write-Error "No IP addresses were found."
+              }
+          }
+
+      - name: Commit updated data to repo
+        uses: stefanzweifel/git-auto-commit-action@v5
