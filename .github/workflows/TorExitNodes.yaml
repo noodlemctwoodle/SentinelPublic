@@ -2,7 +2,6 @@ name: Pull external data source TOR Exit Nodes
 
 on:
   workflow_dispatch:
-
   schedule:
     - cron: "0 0 */1 * *"
 
@@ -32,13 +31,19 @@ jobs:
               }
           
               if ($exitNodeIPs.Count -gt 0) {
-              
                   $csvContent = "TorExitNodes`n" + ($exitNodeIPs | ForEach-Object { $_.TorExitNodes }) -join "`n"
-                  Set-Content -Path ${{ github.workspace }}/ExternalData/TorExitNodes.csv -Value $csvContent
+                  $csvPath = "${{ github.workspace }}/ExternalData/TorExitNodes.csv"
+                  Set-Content -Path $csvPath -Value $csvContent -Force
+                  Write-Output "TOR exit nodes have been saved to $csvPath"
               } else {
                   Write-Error "No IP addresses were found."
               }
+          } else {
+              Write-Error "Failed to fetch the TOR exit nodes. Status code: $($response.StatusCode)"
           }
 
       - name: Commit updated data to repo
         uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Update TOR exit nodes"
+          file_pattern: ExternalData/TorExitNodes.csv
