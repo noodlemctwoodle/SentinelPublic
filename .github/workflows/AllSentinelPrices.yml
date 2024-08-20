@@ -14,13 +14,19 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v3
 
-      - name: Fetch Microsoft Sentinel Prices and create CSV
+      - name: Fetch Microsoft Sentinel Prices in GBP, USD, and EUR
         shell: pwsh
         run: |
-          $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel'"
-          $response = Invoke-RestMethod -Uri $apiUrl -Method Get
-          $items = $response.Items
-          $sortedItems = $items | Sort-Object location, skuName
+          $currencies = @("GBP", "USD", "EUR")
+          $allItems = @()
+
+          foreach ($currency in $currencies) {
+              $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=$currency&`$filter=productName eq 'Sentinel'"
+              $response = Invoke-RestMethod -Uri $apiUrl -Method Get
+              $allItems += $response.Items
+          }
+
+          $sortedItems = $allItems | Sort-Object location, skuName
           $selectedItems = $sortedItems | Select-Object skuName, unitOfMeasure, type, retailPrice, unitPrice, currencyCode, location, effectiveStartDate, meterId, meterName, skuId, productName, serviceFamily
           
           $csvFilePath = "AllSentinelPrices.csv"
