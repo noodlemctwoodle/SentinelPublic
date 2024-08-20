@@ -1,4 +1,4 @@
-name: Pull external data source Sentinel prices
+name: Pull external data source Sentinel UK prices
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
       - name: Fetch Microsoft Sentinel Prices and create CSV
         shell: pwsh
         run: |
-          $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel'" # and (location eq 'UK South' or location eq 'UK West')"
+          $apiUrl = "https://prices.azure.com/api/retail/prices?currencyCode=GBP&`$filter=productName eq 'Sentinel' and (location eq 'UK South' or location eq 'UK West')"
           $response = Invoke-RestMethod -Uri $apiUrl -Method Get
           $items = $response.Items
           $sortedItems = $items | Sort-Object location, skuName
