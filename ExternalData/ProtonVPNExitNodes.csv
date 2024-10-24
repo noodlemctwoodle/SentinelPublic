@@ -17,8 +17,8 @@ ExitIP,ServicesDown,City,ExitCountry
 5.181.157.8,False,,MD
 5.181.157.112,False,Chisinau,MD
 5.181.157.113,False,Chisinau,MD
-5.253.204.163,False,,LU
 5.253.204.163,False,Luxembourg,LU
+5.253.204.163,False,,LU
 5.253.204.164,False,Luxembourg,LU
 5.253.204.165,False,Luxembourg,LU
 5.253.204.166,False,Luxembourg,LU
@@ -149,8 +149,8 @@ ExitIP,ServicesDown,City,ExitCountry
 36.50.238.22,False,Dhaka,BD
 36.50.238.23,False,Dhaka,BD
 36.50.238.24,False,Dhaka,BD
-37.0.12.227,False,,MY
 37.0.12.227,False,Johor Bahru,MY
+37.0.12.227,False,,MY
 37.0.12.228,False,Johor Bahru,MY
 37.0.12.229,False,Johor Bahru,MY
 37.0.12.230,False,Johor Bahru,MY
@@ -164,8 +164,8 @@ ExitIP,ServicesDown,City,ExitCountry
 37.0.12.238,False,Johor Bahru,MY
 37.19.201.131,False,Singapore,SG
 37.19.201.132,False,Singapore,SG
-37.19.201.133,False,Singapore,SG
 37.19.201.133,False,,SG
+37.19.201.133,False,Singapore,SG
 37.19.201.134,False,Singapore,SG
 37.19.201.135,False,Singapore,SG
 37.19.201.136,False,Singapore,SG
@@ -644,8 +644,8 @@ ExitIP,ServicesDown,City,ExitCountry
 45.128.133.227,False,Brussels,BE
 45.128.133.228,False,Brussels,BE
 45.128.133.229,False,Brussels,BE
-45.128.133.230,False,Brussels,BE
 45.128.133.230,False,,BE
+45.128.133.230,False,Brussels,BE
 45.128.133.231,False,Brussels,BE
 45.128.133.232,False,Brussels,BE
 45.128.133.233,False,Brussels,BE
@@ -665,8 +665,8 @@ ExitIP,ServicesDown,City,ExitCountry
 45.128.134.94,False,Paris,FR
 45.128.134.195,False,Paris,FR
 45.128.134.196,False,Paris,FR
-45.128.134.197,False,Paris,FR
 45.128.134.197,False,,FR
+45.128.134.197,False,Paris,FR
 45.128.134.198,False,Paris,FR
 45.128.134.199,False,,FR
 45.134.140.34,False,Atlanta,US
@@ -721,8 +721,8 @@ ExitIP,ServicesDown,City,ExitCountry
 45.146.222.238,False,Belgrade,RS
 62.112.9.165,False,Amsterdam,NL
 62.112.9.166,False,Amsterdam,NL
-62.112.9.167,False,Amsterdam,NL
 62.112.9.167,False,,NL
+62.112.9.167,False,Amsterdam,NL
 62.112.9.192,False,Amsterdam,NL
 62.112.9.237,False,Amsterdam,NL
 62.112.9.243,False,Amsterdam,NL
@@ -782,8 +782,8 @@ ExitIP,ServicesDown,City,ExitCountry
 66.90.72.171,False,Buenos Aires,AR
 66.90.72.172,False,Buenos Aires,AR
 66.90.72.173,False,Buenos Aires,AR
-66.90.72.174,False,,AR
 66.90.72.174,False,Buenos Aires,AR
+66.90.72.174,False,,AR
 66.90.73.114,False,Buenos Aires,AR
 66.90.73.115,False,Buenos Aires,AR
 66.90.73.116,False,Buenos Aires,AR
@@ -855,7 +855,6 @@ ExitIP,ServicesDown,City,ExitCountry
 72.14.148.47,False,Phoenix,US
 72.14.148.48,False,Phoenix,US
 74.63.204.211,False,Salt Lake City,US
-74.63.204.211,False,,US
 74.63.204.212,False,Salt Lake City,US
 74.63.204.213,False,Salt Lake City,US
 74.63.204.214,False,Salt Lake City,US
@@ -884,8 +883,8 @@ ExitIP,ServicesDown,City,ExitCountry
 77.247.178.154,False,Amsterdam,NL
 77.247.178.163,False,Amsterdam,NL
 77.247.178.199,False,Amsterdam,NL
-79.110.55.3,False,Seoul,KR
 79.110.55.3,False,,KR
+79.110.55.3,False,Seoul,KR
 79.110.55.4,False,Seoul,KR
 79.110.55.5,False,Seoul,KR
 79.110.55.6,False,Seoul,KR
@@ -1002,6 +1001,7 @@ ExitIP,ServicesDown,City,ExitCountry
 79.127.134.106,False,Paris,FR
 79.127.134.107,False,Paris,FR
 79.127.134.108,False,Paris,FR
+79.127.136.1,False,,US
 79.127.136.1,False,Chicago,US
 79.127.136.2,False,Chicago,US
 79.127.136.3,False,Chicago,US
@@ -1048,8 +1048,8 @@ ExitIP,ServicesDown,City,ExitCountry
 79.127.136.43,False,Chicago,US
 79.127.136.44,False,Chicago,US
 79.127.136.45,False,Chicago,US
-79.127.136.66,False,Chicago,US
 79.127.136.66,False,,US
+79.127.136.66,False,Chicago,US
 79.127.136.67,False,Chicago,US
 79.127.136.68,False,Chicago,US
 79.127.136.69,False,Chicago,US
@@ -1075,6 +1075,7 @@ ExitIP,ServicesDown,City,ExitCountry
 79.127.136.89,False,Chicago,US
 79.127.136.90,False,Chicago,US
 79.127.136.91,False,Chicago,US
+79.127.136.93,False,,US
 79.127.136.93,False,Chicago,US
 79.127.136.94,False,Chicago,US
 79.127.136.95,False,Chicago,US
@@ -1255,8 +1256,8 @@ ExitIP,ServicesDown,City,ExitCountry
 79.127.254.89,False,Vancouver,CA
 79.127.254.90,False,Vancouver,CA
 79.127.254.91,False,Vancouver,CA
-79.127.254.93,False,,CA
 79.127.254.93,False,Vancouver,CA
+79.127.254.93,False,,CA
 79.127.254.94,False,Vancouver,CA
 79.127.254.95,False,Vancouver,CA
 79.127.254.96,False,Vancouver,CA
@@ -1486,6 +1487,7 @@ ExitIP,ServicesDown,City,ExitCountry
 84.17.63.9,False,Denver,US
 84.17.63.10,False,Denver,US
 84.17.63.11,False,Denver,US
+84.17.63.12,False,,US
 84.17.63.12,False,Denver,US
 84.17.63.13,False,Denver,US
 84.17.63.14,False,Denver,US
@@ -1497,12 +1499,13 @@ ExitIP,ServicesDown,City,ExitCountry
 84.17.63.20,False,Denver,US
 84.17.63.21,False,Denver,US
 84.17.63.55,False,Denver,US
+84.17.63.56,False,,US
 84.17.63.56,False,Denver,US
 84.17.63.57,False,Denver,US
 84.17.63.58,False,Denver,US
 84.247.50.179,False,Oslo,NO
-84.247.50.180,False,,NO
 84.247.50.180,False,Oslo,NO
+84.247.50.180,False,,NO
 84.247.50.181,False,Oslo,NO
 84.247.50.182,False,Oslo,NO
 84.252.95.146,False,Manchester,UK
@@ -1515,8 +1518,8 @@ ExitIP,ServicesDown,City,ExitCountry
 84.252.95.164,False,Manchester,UK
 84.252.95.165,False,Manchester,UK
 84.252.95.166,False,Manchester,UK
-84.252.112.1,False,Valletta,MT
 84.252.112.1,False,,MT
+84.252.112.1,False,Valletta,MT
 84.252.112.2,False,Valletta,MT
 84.252.112.3,False,Valletta,MT
 84.252.112.4,False,Valletta,MT
@@ -1582,9 +1585,9 @@ ExitIP,ServicesDown,City,ExitCountry
 84.252.114.6,False,Buenos Aires,AR
 84.252.114.7,False,Buenos Aires,AR
 84.252.114.8,False,Buenos Aires,AR
-84.252.115.1,False,,AE
-84.252.115.1,False,,AE
 84.252.115.1,False,Dubai,AE
+84.252.115.1,False,,AE
+84.252.115.1,False,,AE
 84.252.115.2,False,Dubai,AE
 84.252.115.3,False,Dubai,AE
 84.252.115.4,False,Dubai,AE
@@ -1597,8 +1600,8 @@ ExitIP,ServicesDown,City,ExitCountry
 85.132.252.36,False,,CY
 85.132.252.37,False,Limassol,CY
 85.132.252.38,False,Limassol,CY
-85.203.39.227,False,Riga,LV
 85.203.39.227,False,,LV
+85.203.39.227,False,Riga,LV
 85.203.39.228,False,Riga,LV
 85.203.39.229,False,Riga,LV
 85.203.39.230,False,Riga,LV
@@ -1610,8 +1613,8 @@ ExitIP,ServicesDown,City,ExitCountry
 85.203.39.236,False,Riga,LV
 85.203.39.237,False,Riga,LV
 85.203.39.238,False,Riga,LV
-85.204.78.1,False,,EC
 85.204.78.1,False,Quito,EC
+85.204.78.1,False,,EC
 85.204.78.2,False,Quito,EC
 85.204.78.3,False,Quito,EC
 85.204.78.4,False,Quito,EC
@@ -1621,8 +1624,8 @@ ExitIP,ServicesDown,City,ExitCountry
 85.204.78.8,False,Quito,EC
 85.206.170.149,False,,LT
 85.206.170.149,False,,LT
-85.206.170.149,False,Siauliai,LT
 85.206.170.149,False,,LT
+85.206.170.149,False,Siauliai,LT
 85.206.170.150,False,Siauliai,LT
 85.206.170.151,False,Siauliai,LT
 85.206.170.152,False,Siauliai,LT
@@ -1645,8 +1648,8 @@ ExitIP,ServicesDown,City,ExitCountry
 87.249.133.111,False,Vienna,AT
 87.249.133.112,False,Vienna,AT
 87.249.133.113,False,Vienna,AT
-87.249.133.193,False,Vienna,AT
 87.249.133.193,False,,AT
+87.249.133.193,False,Vienna,AT
 87.249.133.194,False,Vienna,AT
 87.249.133.195,False,Vienna,AT
 87.249.133.196,False,Vienna,AT
@@ -1698,8 +1701,8 @@ ExitIP,ServicesDown,City,ExitCountry
 87.249.139.162,False,Istanbul,TR
 87.249.139.163,False,Istanbul,TR
 87.249.139.164,False,Istanbul,TR
-87.249.139.165,False,,TR
 87.249.139.165,False,Istanbul,TR
+87.249.139.165,False,,TR
 87.249.139.166,False,Istanbul,TR
 87.249.139.167,False,Istanbul,TR
 87.249.139.168,False,Istanbul,TR
@@ -1709,8 +1712,8 @@ ExitIP,ServicesDown,City,ExitCountry
 89.36.76.76,False,Berlin,DE
 89.36.76.77,False,Berlin,DE
 89.36.76.78,False,Berlin,DE
-89.36.76.131,False,Berlin,DE
 89.36.76.131,False,,DE
+89.36.76.131,False,Berlin,DE
 89.36.76.132,False,Berlin,DE
 89.36.76.133,False,Berlin,DE
 89.36.76.134,False,Berlin,DE
@@ -1722,6 +1725,7 @@ ExitIP,ServicesDown,City,ExitCountry
 89.36.76.140,False,Berlin,DE
 89.36.76.141,False,Berlin,DE
 89.36.76.142,False,Berlin,DE
+89.45.4.3,False,,US
 89.45.4.3,False,Los Angeles,US
 89.45.4.4,False,Los Angeles,US
 89.45.4.5,False,Los Angeles,US
@@ -1735,17 +1739,18 @@ ExitIP,ServicesDown,City,ExitCountry
 89.45.4.13,False,Los Angeles,US
 89.45.4.14,False,Los Angeles,US
 89.187.164.242,False,Dallas,US
-89.187.164.243,False,,US
 89.187.164.243,False,Dallas,US
+89.187.164.243,False,,US
 89.187.164.244,False,Dallas,US
 89.187.164.245,False,Dallas,US
 89.187.164.247,False,Dallas,US
-89.187.164.248,False,,US
 89.187.164.248,False,Dallas,US
+89.187.164.248,False,,US
 89.187.164.249,False,Dallas,US
 89.187.164.250,False,Dallas,US
 89.187.170.158,False,Atlanta,US
 89.187.170.163,False,Atlanta,US
+89.187.170.163,False,,US
 89.187.170.164,False,Atlanta,US
 89.187.170.166,False,Atlanta,US
 89.187.170.173,False,Atlanta,US
@@ -1766,6 +1771,7 @@ ExitIP,ServicesDown,City,ExitCountry
 89.187.171.241,False,Atlanta,US
 89.187.171.242,False,Atlanta,US
 89.187.171.243,False,Atlanta,US
+89.187.171.243,False,,US
 89.187.171.244,False,Atlanta,US
 89.187.171.245,False,Atlanta,US
 89.187.171.246,False,Atlanta,US
@@ -1773,6 +1779,7 @@ ExitIP,ServicesDown,City,ExitCountry
 89.187.171.248,False,,US
 89.187.175.130,False,Dallas,US
 89.187.175.137,False,Dallas,US
+89.187.175.137,False,,US
 89.187.175.141,False,Dallas,US
 89.187.175.144,False,Dallas,US
 89.187.175.145,False,Dallas,US
@@ -1791,6 +1798,7 @@ ExitIP,ServicesDown,City,ExitCountry
 89.187.177.148,False,New York,US
 89.187.177.149,False,New York,US
 89.187.178.174,False,New York,US
+89.187.178.174,False,,US
 89.187.178.175,False,New York,US
 89.187.178.176,False,New York,US
 89.187.178.177,False,New York,US
@@ -1828,6 +1836,7 @@ ExitIP,ServicesDown,City,ExitCountry
 89.187.180.38,False,Chicago,US
 89.187.180.39,False,Chicago,US
 89.187.180.41,False,Chicago,US
+89.187.180.42,False,,US
 89.187.180.42,False,Chicago,US
 89.187.180.43,False,Chicago,US
 89.187.180.44,False,Chicago,US
@@ -1875,8 +1884,8 @@ ExitIP,ServicesDown,City,ExitCountry
 91.90.123.188,False,Brussels,BE
 91.90.123.189,False,Brussels,BE
 91.90.123.190,False,Brussels,BE
-91.132.139.3,False,,AT
 91.132.139.3,False,Vienna,AT
+91.132.139.3,False,,AT
 91.132.139.4,False,Vienna,AT
 91.132.139.5,False,Vienna,AT
 91.132.139.6,False,Vienna,AT
@@ -1953,8 +1962,8 @@ ExitIP,ServicesDown,City,ExitCountry
 94.190.195.29,False,Thimphu,BT
 94.190.195.30,False,Thimphu,BT
 94.190.195.31,False,Thimphu,BT
-94.190.195.232,False,Bangkok,TH
 94.190.195.232,False,,TH
+94.190.195.232,False,Bangkok,TH
 94.190.195.233,False,Bangkok,TH
 94.190.195.234,False,Bangkok,TH
 94.190.195.235,False,Bangkok,TH
@@ -1962,8 +1971,8 @@ ExitIP,ServicesDown,City,ExitCountry
 94.190.195.237,False,Bangkok,TH
 94.190.195.238,False,Bangkok,TH
 94.190.195.239,False,Bangkok,TH
-95.153.31.115,False,Tallinn,EE
 95.153.31.115,False,,EE
+95.153.31.115,False,Tallinn,EE
 95.153.31.116,False,Tallinn,EE
 95.153.31.117,False,Tallinn,EE
 95.153.31.118,False,Tallinn,EE
@@ -2029,6 +2038,7 @@ ExitIP,ServicesDown,City,ExitCountry
 95.173.217.53,False,Dallas,US
 95.173.217.54,False,Dallas,US
 95.173.217.55,False,Dallas,US
+95.173.221.34,False,,US
 95.173.221.34,False,Denver,US
 95.173.221.35,False,Denver,US
 95.173.221.36,False,Denver,US
@@ -2065,8 +2075,8 @@ ExitIP,ServicesDown,City,ExitCountry
 102.38.199.6,False,Santiago,CL
 102.38.199.7,False,Santiago,CL
 102.38.199.8,False,Santiago,CL
-102.38.204.1,False,,PE
 102.38.204.1,False,Lima,PE
+102.38.204.1,False,,PE
 102.38.204.2,False,Lima,PE
 102.38.204.3,False,Lima,PE
 102.38.204.4,False,Lima,PE
@@ -2087,8 +2097,8 @@ ExitIP,ServicesDown,City,ExitCountry
 102.218.103.10,False,Abuja,NG
 102.218.103.11,False,Abuja,NG
 102.218.103.12,False,Abuja,NG
-103.69.224.10,False,,NL
 103.69.224.10,False,Amsterdam,NL
+103.69.224.10,False,,NL
 103.69.224.11,False,Amsterdam,NL
 103.69.224.12,False,Amsterdam,NL
 103.69.224.13,False,Amsterdam,NL
@@ -2147,8 +2157,8 @@ ExitIP,ServicesDown,City,ExitCountry
 103.69.224.67,False,Amsterdam,NL
 103.69.224.68,False,Amsterdam,NL
 103.69.224.69,False,Amsterdam,NL
-103.69.224.70,False,,NL
 103.69.224.70,False,Amsterdam,NL
+103.69.224.70,False,,NL
 103.69.224.71,False,Amsterdam,NL
 103.69.224.72,False,Amsterdam,NL
 103.69.224.73,False,Amsterdam,NL
@@ -2240,8 +2250,8 @@ ExitIP,ServicesDown,City,ExitCountry
 103.69.224.158,False,Amsterdam,NL
 103.69.224.159,False,Amsterdam,NL
 103.69.224.160,False,Amsterdam,NL
-103.75.11.19,False,Auckland,NZ
 103.75.11.19,False,,NZ
+103.75.11.19,False,Auckland,NZ
 103.75.11.20,False,Auckland,NZ
 103.75.11.21,False,Auckland,NZ
 103.75.11.22,False,Auckland,NZ
@@ -2254,8 +2264,8 @@ ExitIP,ServicesDown,City,ExitCountry
 103.75.11.36,False,Auckland,NZ
 103.75.11.37,False,Auckland,NZ
 103.75.11.38,False,Auckland,NZ
-103.108.229.19,False,,AU
 103.108.229.19,False,Melbourne,AU
+103.108.229.19,False,,AU
 103.108.229.20,False,Melbourne,AU
 103.108.229.21,False,Melbourne,AU
 103.108.229.22,False,Melbourne,AU
@@ -2276,8 +2286,8 @@ ExitIP,ServicesDown,City,ExitCountry
 103.108.229.252,False,Melbourne,AU
 103.108.229.253,False,Melbourne,AU
 103.108.229.254,False,Melbourne,AU
-103.108.231.19,False,,AU
 103.108.231.19,False,Perth,AU
+103.108.231.19,False,,AU
 103.108.231.20,False,Perth,AU
 103.108.231.21,False,Perth,AU
 103.108.231.22,False,Perth,AU
@@ -2328,8 +2338,8 @@ ExitIP,ServicesDown,City,ExitCountry
 103.155.232.232,False,Tokyo,JP
 103.155.232.233,False,Tokyo,JP
 103.155.232.234,False,Tokyo,JP
-103.214.20.99,False,,AU
 103.214.20.99,False,Adelaide,AU
+103.214.20.99,False,,AU
 103.214.20.100,False,Adelaide,AU
 103.214.20.101,False,Adelaide,AU
 103.214.20.102,False,Adelaide,AU
@@ -2386,6 +2396,7 @@ ExitIP,ServicesDown,City,ExitCountry
 103.216.220.124,False,Brisbane,AU
 103.216.220.125,False,Brisbane,AU
 103.216.220.126,False,Brisbane,AU
+104.234.212.2,False,,US
 104.234.212.2,False,Washington,US
 104.234.212.3,False,Washington,US
 104.234.212.4,False,Washington,US
@@ -2410,8 +2421,8 @@ ExitIP,ServicesDown,City,ExitCountry
 104.234.212.23,False,Washington,US
 104.234.212.24,False,Washington,US
 104.234.212.25,False,Washington,US
-104.234.212.27,False,,US
 104.234.212.27,False,Washington,US
+104.234.212.27,False,,US
 104.234.212.28,False,Washington,US
 104.234.212.29,False,Washington,US
 104.234.212.30,False,Washington,US
@@ -2532,8 +2543,8 @@ ExitIP,ServicesDown,City,ExitCountry
 107.181.177.8,False,Vancouver,CA
 107.181.177.9,False,Vancouver,CA
 107.181.177.10,False,Vancouver,CA
-107.181.177.12,False,,CA
 107.181.177.12,False,Vancouver,CA
+107.181.177.12,False,,CA
 107.181.177.13,False,Vancouver,CA
 107.181.177.14,False,Vancouver,CA
 107.181.177.15,False,Vancouver,CA
@@ -2831,8 +2842,8 @@ ExitIP,ServicesDown,City,ExitCountry
 138.199.33.179,False,Sydney,AU
 138.199.33.180,False,Sydney,AU
 138.199.33.181,False,Sydney,AU
-138.199.33.226,False,Sydney,AU
 138.199.33.226,False,,AU
+138.199.33.226,False,Sydney,AU
 138.199.33.227,False,Sydney,AU
 138.199.33.228,False,Sydney,AU
 138.199.33.229,False,Sydney,AU
@@ -2854,8 +2865,8 @@ ExitIP,ServicesDown,City,ExitCountry
 138.199.33.249,False,Sydney,AU
 138.199.33.250,False,Sydney,AU
 138.199.33.251,False,Sydney,AU
-138.199.35.98,False,Los Angeles,US
 138.199.35.98,False,,US
+138.199.35.98,False,Los Angeles,US
 138.199.35.99,False,Los Angeles,US
 138.199.35.100,False,Los Angeles,US
 138.199.35.101,False,Los Angeles,US
@@ -2912,8 +2923,8 @@ ExitIP,ServicesDown,City,ExitCountry
 138.199.62.198,False,Hong Kong,HK
 138.199.62.199,False,Hong Kong,HK
 138.199.62.200,False,Hong Kong,HK
-139.28.218.3,False,Montreal,CA
 139.28.218.3,False,,CA
+139.28.218.3,False,Montreal,CA
 139.28.218.4,False,Montreal,CA
 139.28.218.5,False,Montreal,CA
 139.28.218.6,False,Montreal,CA
@@ -3005,8 +3016,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.45.124,False,Miami,US
 146.70.45.125,False,Miami,US
 146.70.45.126,False,Miami,US
-146.70.45.227,False,Miami,US
 146.70.45.227,False,,US
+146.70.45.227,False,Miami,US
 146.70.45.228,False,Miami,US
 146.70.45.229,False,Miami,US
 146.70.45.230,False,Miami,US
@@ -3018,8 +3029,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.45.236,False,Miami,US
 146.70.45.237,False,Miami,US
 146.70.45.238,False,Miami,US
-146.70.48.3,False,,IE
 146.70.48.3,False,Dublin,IE
+146.70.48.3,False,,IE
 146.70.48.3,False,,IE
 146.70.48.4,False,Dublin,IE
 146.70.48.5,False,Dublin,IE
@@ -3037,8 +3048,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.48.20,False,Dublin,IE
 146.70.48.21,False,Dublin,IE
 146.70.48.22,False,Dublin,IE
-146.70.51.211,False,,US
 146.70.51.211,False,Miami,US
+146.70.51.211,False,,US
 146.70.51.212,False,Miami,US
 146.70.51.213,False,Miami,US
 146.70.51.214,False,Miami,US
@@ -3089,8 +3100,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.72.174,False,New York,US
 146.70.83.67,False,London,UK
 146.70.83.68,False,London,UK
-146.70.83.69,False,,UK
 146.70.83.69,False,London,UK
+146.70.83.69,False,,UK
 146.70.83.70,False,London,UK
 146.70.83.71,False,London,UK
 146.70.83.72,False,London,UK
@@ -3182,8 +3193,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.98.156,False,São Paulo,BR
 146.70.98.157,False,São Paulo,BR
 146.70.98.158,False,São Paulo,BR
-146.70.98.163,False,,BR
 146.70.98.163,False,São Paulo,BR
+146.70.98.163,False,,BR
 146.70.98.164,False,São Paulo,BR
 146.70.98.165,False,São Paulo,BR
 146.70.98.166,False,São Paulo,BR
@@ -3216,8 +3227,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.100.52,False,Los Angeles,US
 146.70.100.53,False,Los Angeles,US
 146.70.100.54,False,Los Angeles,US
-146.70.113.99,False,Hong Kong,HK
 146.70.113.99,False,,HK
+146.70.113.99,False,Hong Kong,HK
 146.70.113.100,False,Hong Kong,HK
 146.70.113.101,False,Hong Kong,HK
 146.70.113.102,False,Hong Kong,HK
@@ -3229,8 +3240,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.113.108,False,Hong Kong,HK
 146.70.113.109,False,Hong Kong,HK
 146.70.113.110,False,Hong Kong,HK
-146.70.113.115,False,Hong Kong,HK
 146.70.113.115,False,,HK
+146.70.113.115,False,Hong Kong,HK
 146.70.113.116,False,Hong Kong,HK
 146.70.113.117,False,Hong Kong,HK
 146.70.113.118,False,Hong Kong,HK
@@ -3242,8 +3253,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.113.124,False,Hong Kong,HK
 146.70.113.125,False,Hong Kong,HK
 146.70.113.126,False,Hong Kong,HK
-146.70.115.163,False,New York,US
 146.70.115.163,False,,US
+146.70.115.163,False,New York,US
 146.70.115.164,False,New York,US
 146.70.115.165,False,New York,US
 146.70.115.166,False,New York,US
@@ -3255,8 +3266,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.115.172,False,New York,US
 146.70.115.173,False,New York,US
 146.70.115.174,False,New York,US
-146.70.120.147,False,Budapest,HU
 146.70.120.147,False,,HU
+146.70.120.147,False,Budapest,HU
 146.70.120.148,False,Budapest,HU
 146.70.120.149,False,Budapest,HU
 146.70.120.150,False,Budapest,HU
@@ -3268,8 +3279,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.120.156,False,Budapest,HU
 146.70.120.157,False,Budapest,HU
 146.70.120.158,False,Budapest,HU
-146.70.120.211,False,,HU
 146.70.120.211,False,Budapest,HU
+146.70.120.211,False,,HU
 146.70.120.212,False,Budapest,HU
 146.70.120.213,False,Budapest,HU
 146.70.120.214,False,Budapest,HU
@@ -3281,8 +3292,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.120.220,False,Budapest,HU
 146.70.120.221,False,Budapest,HU
 146.70.120.222,False,Budapest,HU
-146.70.127.243,False,,US
 146.70.127.243,False,Los Angeles,US
+146.70.127.243,False,,US
 146.70.127.244,False,Los Angeles,US
 146.70.127.245,False,Los Angeles,US
 146.70.127.246,False,Los Angeles,US
@@ -3294,8 +3305,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.127.252,False,Los Angeles,US
 146.70.127.253,False,Los Angeles,US
 146.70.127.254,False,Los Angeles,US
-146.70.129.19,False,,CZ
 146.70.129.19,False,Prague,CZ
+146.70.129.19,False,,CZ
 146.70.129.20,False,Prague,CZ
 146.70.129.21,False,Prague,CZ
 146.70.129.22,False,Prague,CZ
@@ -3307,8 +3318,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.129.28,False,Prague,CZ
 146.70.129.29,False,Prague,CZ
 146.70.129.30,False,Prague,CZ
-146.70.133.131,False,Manchester,UK
 146.70.133.131,False,,UK
+146.70.133.131,False,Manchester,UK
 146.70.133.132,False,Manchester,UK
 146.70.133.133,False,Manchester,UK
 146.70.133.134,False,Manchester,UK
@@ -3328,9 +3339,9 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.136.44,False,Bogota,CO
 146.70.136.45,False,Bogota,CO
 146.70.136.46,False,Bogota,CO
+146.70.142.19,False,,IN
+146.70.142.19,False,,IN
 146.70.142.19,False,Mumbai,IN
-146.70.142.19,False,,IN
-146.70.142.19,False,,IN
 146.70.142.20,False,Mumbai,IN
 146.70.142.21,False,Mumbai,IN
 146.70.142.22,False,Mumbai,IN
@@ -3362,6 +3373,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.142.140,False,Mumbai,IN
 146.70.142.141,False,Mumbai,IN
 146.70.142.142,False,Mumbai,IN
+146.70.147.115,False,,US
 146.70.147.115,False,Miami,US
 146.70.147.116,False,Miami,US
 146.70.147.117,False,Miami,US
@@ -3387,8 +3399,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.161.172,False,Warsaw,PL
 146.70.161.173,False,Warsaw,PL
 146.70.161.174,False,Warsaw,PL
-146.70.161.179,False,,PL
 146.70.161.179,False,Warsaw,PL
+146.70.161.179,False,,PL
 146.70.161.180,False,Warsaw,PL
 146.70.161.181,False,Warsaw,PL
 146.70.161.182,False,Warsaw,PL
@@ -3400,8 +3412,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.161.188,False,Warsaw,PL
 146.70.161.189,False,Warsaw,PL
 146.70.161.190,False,Warsaw,PL
-146.70.170.3,False,Oslo,NO
 146.70.170.3,False,,NO
+146.70.170.3,False,Oslo,NO
 146.70.170.4,False,Oslo,NO
 146.70.170.5,False,Oslo,NO
 146.70.170.6,False,Oslo,NO
@@ -3413,8 +3425,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.170.12,False,Oslo,NO
 146.70.170.13,False,Oslo,NO
 146.70.170.14,False,Oslo,NO
-146.70.170.19,False,Oslo,NO
 146.70.170.19,False,,NO
+146.70.170.19,False,Oslo,NO
 146.70.170.20,False,Oslo,NO
 146.70.170.21,False,Oslo,NO
 146.70.170.22,False,Oslo,NO
@@ -3427,6 +3439,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.170.29,False,Oslo,NO
 146.70.170.30,False,Oslo,NO
 146.70.174.83,False,Los Angeles,US
+146.70.174.83,False,,US
 146.70.174.84,False,Los Angeles,US
 146.70.174.85,False,Los Angeles,US
 146.70.174.86,False,Los Angeles,US
@@ -3438,6 +3451,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.92,False,Los Angeles,US
 146.70.174.93,False,Los Angeles,US
 146.70.174.94,False,Los Angeles,US
+146.70.174.131,False,,US
 146.70.174.131,False,Los Angeles,US
 146.70.174.132,False,Los Angeles,US
 146.70.174.133,False,Los Angeles,US
@@ -3451,6 +3465,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.141,False,Los Angeles,US
 146.70.174.142,False,Los Angeles,US
 146.70.174.147,False,Los Angeles,US
+146.70.174.147,False,,US
 146.70.174.148,False,Los Angeles,US
 146.70.174.149,False,Los Angeles,US
 146.70.174.150,False,Los Angeles,US
@@ -3463,6 +3478,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.157,False,Los Angeles,US
 146.70.174.158,False,Los Angeles,US
 146.70.174.163,False,Los Angeles,US
+146.70.174.163,False,,US
 146.70.174.164,False,Los Angeles,US
 146.70.174.165,False,Los Angeles,US
 146.70.174.166,False,Los Angeles,US
@@ -3474,6 +3490,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.172,False,Los Angeles,US
 146.70.174.173,False,Los Angeles,US
 146.70.174.174,False,Los Angeles,US
+146.70.174.179,False,,US
 146.70.174.179,False,Los Angeles,US
 146.70.174.180,False,Los Angeles,US
 146.70.174.181,False,Los Angeles,US
@@ -3487,6 +3504,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.189,False,Los Angeles,US
 146.70.174.190,False,Los Angeles,US
 146.70.174.195,False,Los Angeles,US
+146.70.174.195,False,,US
 146.70.174.196,False,Los Angeles,US
 146.70.174.197,False,Los Angeles,US
 146.70.174.198,False,Los Angeles,US
@@ -3498,6 +3516,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.204,False,Los Angeles,US
 146.70.174.205,False,Los Angeles,US
 146.70.174.206,False,Los Angeles,US
+146.70.174.211,False,,US
 146.70.174.211,False,Los Angeles,US
 146.70.174.212,False,Los Angeles,US
 146.70.174.213,False,Los Angeles,US
@@ -3511,6 +3530,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.221,False,Los Angeles,US
 146.70.174.222,False,Los Angeles,US
 146.70.174.227,False,Los Angeles,US
+146.70.174.227,False,,US
 146.70.174.228,False,Los Angeles,US
 146.70.174.229,False,Los Angeles,US
 146.70.174.230,False,Los Angeles,US
@@ -3522,6 +3542,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.174.236,False,Los Angeles,US
 146.70.174.237,False,Los Angeles,US
 146.70.174.238,False,Los Angeles,US
+146.70.174.243,False,,US
 146.70.174.243,False,Los Angeles,US
 146.70.174.244,False,Los Angeles,US
 146.70.174.245,False,Los Angeles,US
@@ -3560,8 +3581,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.179.44,False,London,UK
 146.70.179.45,False,London,UK
 146.70.179.46,False,London,UK
-146.70.179.51,False,,UK
 146.70.179.51,False,London,UK
+146.70.179.51,False,,UK
 146.70.179.52,False,London,UK
 146.70.179.53,False,London,UK
 146.70.179.54,False,London,UK
@@ -3599,8 +3620,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.181.44,False,Manchester,UK
 146.70.181.45,False,Manchester,UK
 146.70.181.46,False,Manchester,UK
-146.70.182.3,False,Milan,IT
 146.70.182.3,False,,IT
+146.70.182.3,False,Milan,IT
 146.70.182.4,False,Milan,IT
 146.70.182.5,False,Milan,IT
 146.70.182.6,False,Milan,IT
@@ -3612,8 +3633,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.182.12,False,Milan,IT
 146.70.182.13,False,Milan,IT
 146.70.182.14,False,Milan,IT
-146.70.182.19,False,Milan,IT
 146.70.182.19,False,,IT
+146.70.182.19,False,Milan,IT
 146.70.182.20,False,Milan,IT
 146.70.182.21,False,Milan,IT
 146.70.182.22,False,Milan,IT
@@ -3625,8 +3646,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.182.28,False,Milan,IT
 146.70.182.29,False,Milan,IT
 146.70.182.30,False,Milan,IT
-146.70.182.35,False,,IT
 146.70.182.35,False,Milan,IT
+146.70.182.35,False,,IT
 146.70.182.36,False,Milan,IT
 146.70.182.37,False,Milan,IT
 146.70.182.38,False,Milan,IT
@@ -3639,6 +3660,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.182.45,False,Milan,IT
 146.70.182.46,False,Milan,IT
 146.70.183.19,False,Miami,US
+146.70.183.19,False,,US
 146.70.183.20,False,Miami,US
 146.70.183.21,False,Miami,US
 146.70.183.22,False,Miami,US
@@ -3650,8 +3672,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.183.28,False,Miami,US
 146.70.183.29,False,Miami,US
 146.70.183.30,False,Miami,US
-146.70.183.131,False,Miami,US
 146.70.183.131,False,,US
+146.70.183.131,False,Miami,US
 146.70.183.132,False,Miami,US
 146.70.183.133,False,Miami,US
 146.70.183.134,False,Miami,US
@@ -3663,8 +3685,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.183.140,False,Miami,US
 146.70.183.141,False,Miami,US
 146.70.183.142,False,Miami,US
-146.70.183.147,False,Miami,US
 146.70.183.147,False,,US
+146.70.183.147,False,Miami,US
 146.70.183.148,False,Miami,US
 146.70.183.149,False,Miami,US
 146.70.183.150,False,Miami,US
@@ -3676,8 +3698,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.183.156,False,Miami,US
 146.70.183.157,False,Miami,US
 146.70.183.158,False,Miami,US
-146.70.183.163,False,Miami,US
 146.70.183.163,False,,US
+146.70.183.163,False,Miami,US
 146.70.183.164,False,Miami,US
 146.70.183.165,False,Miami,US
 146.70.183.166,False,Miami,US
@@ -3689,8 +3711,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.183.172,False,Miami,US
 146.70.183.173,False,Miami,US
 146.70.183.174,False,Miami,US
-146.70.194.3,False,Paris,FR
 146.70.194.3,False,,FR
+146.70.194.3,False,Paris,FR
 146.70.194.4,False,Paris,FR
 146.70.194.5,False,Paris,FR
 146.70.194.6,False,Paris,FR
@@ -3728,8 +3750,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.194.44,False,Paris,FR
 146.70.194.45,False,Paris,FR
 146.70.194.46,False,Paris,FR
-146.70.194.51,False,Paris,FR
 146.70.194.51,False,,FR
+146.70.194.51,False,Paris,FR
 146.70.194.52,False,Paris,FR
 146.70.194.53,False,Paris,FR
 146.70.194.54,False,Paris,FR
@@ -3741,8 +3763,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.194.60,False,Paris,FR
 146.70.194.61,False,Paris,FR
 146.70.194.62,False,Paris,FR
-146.70.194.67,False,Paris,FR
 146.70.194.67,False,,FR
+146.70.194.67,False,Paris,FR
 146.70.194.68,False,Paris,FR
 146.70.194.69,False,Paris,FR
 146.70.194.70,False,Paris,FR
@@ -3780,8 +3802,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.194.108,False,Paris,FR
 146.70.194.109,False,Paris,FR
 146.70.194.110,False,Paris,FR
-146.70.194.115,False,,FR
 146.70.194.115,False,Paris,FR
+146.70.194.115,False,,FR
 146.70.194.116,False,Paris,FR
 146.70.194.117,False,Paris,FR
 146.70.194.118,False,Paris,FR
@@ -3793,8 +3815,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.194.124,False,Paris,FR
 146.70.194.125,False,Paris,FR
 146.70.194.126,False,Paris,FR
-146.70.195.35,False,,US
 146.70.195.35,False,Los Angeles,US
+146.70.195.35,False,,US
 146.70.195.36,False,Los Angeles,US
 146.70.195.37,False,Los Angeles,US
 146.70.195.38,False,Los Angeles,US
@@ -3845,8 +3867,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.198.12,False,Montreal,CA
 146.70.198.13,False,Montreal,CA
 146.70.198.14,False,Montreal,CA
-146.70.198.19,False,,CA
 146.70.198.19,False,Montreal,CA
+146.70.198.19,False,,CA
 146.70.198.20,False,Montreal,CA
 146.70.198.21,False,Montreal,CA
 146.70.198.22,False,Montreal,CA
@@ -3858,8 +3880,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.198.28,False,Montreal,CA
 146.70.198.29,False,Montreal,CA
 146.70.198.30,False,Montreal,CA
-146.70.198.35,False,,CA
 146.70.198.35,False,Montreal,CA
+146.70.198.35,False,,CA
 146.70.198.36,False,Montreal,CA
 146.70.198.37,False,Montreal,CA
 146.70.198.38,False,Montreal,CA
@@ -3884,8 +3906,8 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.198.60,False,Montreal,CA
 146.70.198.61,False,Montreal,CA
 146.70.198.62,False,Montreal,CA
-146.70.202.19,False,New York,US
 146.70.202.19,False,,US
+146.70.202.19,False,New York,US
 146.70.202.20,False,New York,US
 146.70.202.21,False,New York,US
 146.70.202.22,False,New York,US
@@ -3898,6 +3920,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.202.29,False,New York,US
 146.70.202.30,False,New York,US
 146.70.202.51,False,New York,US
+146.70.202.51,False,,US
 146.70.202.52,False,New York,US
 146.70.202.53,False,New York,US
 146.70.202.54,False,New York,US
@@ -3910,6 +3933,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.202.61,False,New York,US
 146.70.202.62,False,New York,US
 146.70.202.67,False,New York,US
+146.70.202.67,False,,US
 146.70.202.68,False,New York,US
 146.70.202.69,False,New York,US
 146.70.202.70,False,New York,US
@@ -3921,6 +3945,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.202.76,False,New York,US
 146.70.202.77,False,New York,US
 146.70.202.78,False,New York,US
+146.70.202.99,False,,US
 146.70.202.99,False,New York,US
 146.70.202.100,False,New York,US
 146.70.202.101,False,New York,US
@@ -3934,6 +3959,7 @@ ExitIP,ServicesDown,City,ExitCountry
 146.70.202.109,False,New York,US
 146.70.202.110,False,New York,US
 146.70.202.131,False,New York,US
+146.70.202.131,False,,US
 146.70.202.132,False,New York,US
 146.70.202.133,False,New York,US
 146.70.202.134,False,New York,US
@@ -4321,8 +4347,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.80.106,False,Los Angeles,US
 149.22.80.107,False,Los Angeles,US
 149.22.80.108,False,Los Angeles,US
-149.22.81.2,False,,CA
 149.22.81.2,False,Vancouver,CA
+149.22.81.2,False,,CA
 149.22.81.3,False,Vancouver,CA
 149.22.81.4,False,Vancouver,CA
 149.22.81.5,False,Vancouver,CA
@@ -4375,8 +4401,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.81.52,False,Vancouver,CA
 149.22.81.53,False,Vancouver,CA
 149.22.81.54,False,Vancouver,CA
-149.22.82.2,False,Toronto,CA
 149.22.82.2,False,,CA
+149.22.82.2,False,Toronto,CA
 149.22.82.3,False,Toronto,CA
 149.22.82.4,False,Toronto,CA
 149.22.82.5,False,Toronto,CA
@@ -4402,8 +4428,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.82.25,False,Toronto,CA
 149.22.82.26,False,Toronto,CA
 149.22.82.27,False,Toronto,CA
-149.22.82.29,False,Toronto,CA
 149.22.82.29,False,,CA
+149.22.82.29,False,Toronto,CA
 149.22.82.30,False,Toronto,CA
 149.22.82.31,False,Toronto,CA
 149.22.82.32,False,Toronto,CA
@@ -4550,8 +4576,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.84.86,False,San Jose,US
 149.22.84.87,False,San Jose,US
 149.22.84.88,False,San Jose,US
-149.22.84.90,False,San Jose,US
 149.22.84.90,False,,US
+149.22.84.90,False,San Jose,US
 149.22.84.91,False,San Jose,US
 149.22.84.92,False,San Jose,US
 149.22.84.93,False,San Jose,US
@@ -4732,8 +4758,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.94.52,False,Atlanta,US
 149.22.94.53,False,Atlanta,US
 149.22.94.54,False,Atlanta,US
-149.22.94.56,False,,US
 149.22.94.56,False,Atlanta,US
+149.22.94.56,False,,US
 149.22.94.57,False,Atlanta,US
 149.22.94.58,False,Atlanta,US
 149.22.94.59,False,Atlanta,US
@@ -4763,8 +4789,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.22.94.83,False,Atlanta,US
 149.22.94.84,False,Atlanta,US
 149.22.94.85,False,Atlanta,US
-149.22.95.194,False,Vancouver,CA
 149.22.95.194,False,,CA
+149.22.95.194,False,Vancouver,CA
 149.22.95.195,False,Vancouver,CA
 149.22.95.196,False,Vancouver,CA
 149.22.95.197,False,Vancouver,CA
@@ -4850,8 +4876,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.36.48.149,False,San Jose,US
 149.36.48.150,False,San Jose,US
 149.36.48.151,False,San Jose,US
-149.40.48.66,False,,UK
 149.40.48.66,False,London,UK
+149.40.48.66,False,,UK
 149.40.48.67,False,London,UK
 149.40.48.68,False,London,UK
 149.40.48.69,False,London,UK
@@ -4918,8 +4944,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.40.48.249,False,London,UK
 149.40.48.250,False,London,UK
 149.40.48.251,False,London,UK
-149.40.63.130,False,London,UK
 149.40.63.130,False,,UK
+149.40.63.130,False,London,UK
 149.40.63.131,False,London,UK
 149.40.63.132,False,London,UK
 149.40.63.133,False,London,UK
@@ -4973,8 +4999,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.50.209.153,False,London,UK
 149.50.209.154,False,London,UK
 149.50.209.155,False,London,UK
-149.50.209.161,False,London,UK
 149.50.209.161,False,,UK
+149.50.209.161,False,London,UK
 149.50.209.162,False,London,UK
 149.50.209.163,False,London,UK
 149.50.209.164,False,London,UK
@@ -5187,8 +5213,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.88.19.248,False,Frankfurt,DE
 149.88.19.249,False,Frankfurt,DE
 149.88.19.250,False,Frankfurt,DE
-149.88.20.130,False,Lisbon,PT
 149.88.20.130,False,,PT
+149.88.20.130,False,Lisbon,PT
 149.88.20.131,False,Lisbon,PT
 149.88.20.132,False,Lisbon,PT
 149.88.20.133,False,Lisbon,PT
@@ -5261,8 +5287,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.88.24.177,False,Frankfurt,DE
 149.88.24.178,False,Frankfurt,DE
 149.88.24.179,False,Frankfurt,DE
-149.88.24.181,False,Frankfurt,DE
 149.88.24.181,False,,DE
+149.88.24.181,False,Frankfurt,DE
 149.88.24.182,False,Frankfurt,DE
 149.88.24.183,False,Frankfurt,DE
 149.88.24.184,False,Frankfurt,DE
@@ -5444,6 +5470,7 @@ ExitIP,ServicesDown,City,ExitCountry
 149.88.97.119,False,Toronto,CA
 149.88.97.120,False,Toronto,CA
 149.88.97.121,False,Toronto,CA
+149.88.100.167,False,,US
 149.88.100.167,False,Dallas,US
 149.88.100.169,False,Dallas,US
 149.88.100.170,False,Dallas,US
@@ -5657,6 +5684,7 @@ ExitIP,ServicesDown,City,ExitCountry
 149.88.110.57,False,Kyiv,UA
 149.88.110.58,False,Kyiv,UA
 149.88.110.59,False,Kyiv,UA
+149.102.224.163,False,,US
 149.102.224.163,False,Miami,US
 149.102.224.164,False,Miami,US
 149.102.224.165,False,Miami,US
@@ -5681,8 +5709,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.224.185,False,Miami,US
 149.102.224.186,False,Miami,US
 149.102.224.187,False,Miami,US
-149.102.226.194,False,New York,US
 149.102.226.194,False,,US
+149.102.226.194,False,New York,US
 149.102.226.195,False,New York,US
 149.102.226.196,False,New York,US
 149.102.226.197,False,New York,US
@@ -5693,6 +5721,7 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.226.202,False,New York,US
 149.102.226.203,False,New York,US
 149.102.226.226,False,New York,US
+149.102.226.226,False,,US
 149.102.226.227,False,New York,US
 149.102.226.228,False,New York,US
 149.102.226.229,False,New York,US
@@ -5781,8 +5810,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.238.7,False,Zurich,CH
 149.102.238.8,False,Zurich,CH
 149.102.238.9,False,Zurich,CH
-149.102.244.18,False,Warsaw,PL
 149.102.244.18,False,,PL
+149.102.244.18,False,Warsaw,PL
 149.102.244.19,False,Warsaw,PL
 149.102.244.20,False,Warsaw,PL
 149.102.244.21,False,Warsaw,PL
@@ -5799,8 +5828,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.244.121,False,Warsaw,PL
 149.102.244.122,False,Warsaw,PL
 149.102.244.123,False,Warsaw,PL
-149.102.245.130,False,,FR
 149.102.245.130,False,Marseille,FR
+149.102.245.130,False,,FR
 149.102.245.131,False,Marseille,FR
 149.102.245.132,False,Marseille,FR
 149.102.245.133,False,Marseille,FR
@@ -5826,8 +5855,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.245.153,False,Marseille,FR
 149.102.245.154,False,Marseille,FR
 149.102.245.155,False,Marseille,FR
-149.102.245.157,False,Marseille,FR
 149.102.245.157,False,,FR
+149.102.245.157,False,Marseille,FR
 149.102.245.158,False,Marseille,FR
 149.102.245.159,False,Marseille,FR
 149.102.245.160,False,Marseille,FR
@@ -5887,8 +5916,8 @@ ExitIP,ServicesDown,City,ExitCountry
 149.102.254.86,False,Seattle,US
 149.102.254.87,False,Seattle,US
 149.102.254.88,False,Seattle,US
-154.47.16.82,False,,CO
 154.47.16.82,False,Bogota,CO
+154.47.16.82,False,,CO
 154.47.16.83,False,Bogota,CO
 154.47.16.84,False,Bogota,CO
 154.47.16.85,False,Bogota,CO
@@ -5990,8 +6019,8 @@ ExitIP,ServicesDown,City,ExitCountry
 154.47.25.169,False,Chicago,US
 154.47.25.170,False,Chicago,US
 154.47.25.171,False,Chicago,US
-154.47.25.194,False,Chicago,US
 154.47.25.194,False,,US
+154.47.25.194,False,Chicago,US
 154.47.25.195,False,Chicago,US
 154.47.25.196,False,Chicago,US
 154.47.25.197,False,Chicago,US
@@ -6025,8 +6054,8 @@ ExitIP,ServicesDown,City,ExitCountry
 156.146.50.9,False,Kyiv,UA
 156.146.50.10,False,Kyiv,UA
 156.146.50.11,False,Kyiv,UA
-156.146.51.66,False,,US
 156.146.51.66,False,Seattle,US
+156.146.51.66,False,,US
 156.146.51.67,False,Seattle,US
 156.146.51.68,False,Seattle,US
 156.146.51.69,False,Seattle,US
@@ -6065,8 +6094,8 @@ ExitIP,ServicesDown,City,ExitCountry
 156.146.54.109,False,San Jose,US
 156.146.55.226,False,Sofia,BG
 156.146.55.227,False,Sofia,BG
-156.146.55.228,False,,BG
 156.146.55.228,False,Sofia,BG
+156.146.55.228,False,,BG
 156.146.55.229,False,Sofia,BG
 156.146.55.230,False,Sofia,BG
 156.146.55.231,False,Sofia,BG
@@ -6244,15 +6273,15 @@ ExitIP,ServicesDown,City,ExitCountry
 169.150.197.122,False,Zurich,CH
 169.150.204.34,False,Toronto,CA
 169.150.204.35,False,Toronto,CA
-169.150.204.36,False,Toronto,CA
 169.150.204.36,False,,CA
+169.150.204.36,False,Toronto,CA
 169.150.204.37,False,Toronto,CA
 169.150.204.38,False,Toronto,CA
 169.150.204.39,False,Toronto,CA
 169.150.204.40,False,Toronto,CA
 169.150.204.41,False,Toronto,CA
-169.150.204.45,False,,CA
 169.150.204.45,False,Toronto,CA
+169.150.204.45,False,,CA
 169.150.204.46,False,Toronto,CA
 169.150.204.47,False,Toronto,CA
 169.150.204.48,False,Toronto,CA
@@ -6301,6 +6330,7 @@ ExitIP,ServicesDown,City,ExitCountry
 169.150.231.179,False,Denver,US
 169.150.231.180,False,Denver,US
 169.150.231.181,False,Denver,US
+169.150.254.33,False,,US
 169.150.254.33,False,Dallas,US
 169.150.254.34,False,Dallas,US
 169.150.254.35,False,Dallas,US
@@ -6311,8 +6341,8 @@ ExitIP,ServicesDown,City,ExitCountry
 169.150.254.40,False,Dallas,US
 169.150.254.41,False,Dallas,US
 169.150.254.42,False,Dallas,US
-169.150.254.161,False,Dallas,US
 169.150.254.161,False,,US
+169.150.254.161,False,Dallas,US
 169.150.254.162,False,Dallas,US
 169.150.254.163,False,Dallas,US
 169.150.254.164,False,Dallas,US
@@ -6329,8 +6359,8 @@ ExitIP,ServicesDown,City,ExitCountry
 169.150.254.176,False,Dallas,US
 169.150.254.177,False,Dallas,US
 169.150.254.178,False,Dallas,US
-172.98.82.147,False,Montreal,CA
 172.98.82.147,False,,CA
+172.98.82.147,False,Montreal,CA
 172.98.82.148,False,Montreal,CA
 172.98.82.149,False,Montreal,CA
 172.98.82.150,False,Montreal,CA
@@ -6365,8 +6395,8 @@ ExitIP,ServicesDown,City,ExitCountry
 176.96.226.236,False,Moscow,RU
 176.96.226.237,False,Moscow,RU
 176.96.226.238,False,Moscow,RU
-176.96.226.243,False,,RU
 176.96.226.243,False,Moscow,RU
+176.96.226.243,False,,RU
 176.96.226.244,False,Moscow,RU
 176.96.226.245,False,Moscow,RU
 176.96.226.246,False,Moscow,RU
@@ -6391,8 +6421,8 @@ ExitIP,ServicesDown,City,ExitCountry
 176.113.74.92,False,Montreal,CA
 176.113.74.93,False,Montreal,CA
 176.113.74.94,False,Montreal,CA
-178.218.167.211,False,,HR
 178.218.167.211,False,Zagreb,HR
+178.218.167.211,False,,HR
 178.218.167.212,False,Zagreb,HR
 178.218.167.213,False,Zagreb,HR
 178.218.167.214,False,Zagreb,HR
@@ -6415,8 +6445,8 @@ ExitIP,ServicesDown,City,ExitCountry
 178.249.210.23,False,Denver,US
 178.249.210.24,False,Denver,US
 178.249.210.25,False,Denver,US
-178.249.214.65,False,Toronto,CA
 178.249.214.65,False,,CA
+178.249.214.65,False,Toronto,CA
 178.249.214.66,False,Toronto,CA
 178.249.214.67,False,Toronto,CA
 178.249.214.68,False,Toronto,CA
@@ -6428,8 +6458,8 @@ ExitIP,ServicesDown,City,ExitCountry
 178.249.214.74,False,Toronto,CA
 178.249.214.75,False,Toronto,CA
 178.249.214.81,False,Toronto,CA
-178.249.214.82,False,Toronto,CA
 178.249.214.82,False,,CA
+178.249.214.82,False,Toronto,CA
 178.249.214.83,False,Toronto,CA
 178.249.214.84,False,Toronto,CA
 178.249.214.85,False,Toronto,CA
@@ -6456,24 +6486,24 @@ ExitIP,ServicesDown,City,ExitCountry
 185.51.134.195,False,Athens,GR
 185.51.134.196,False,Athens,GR
 185.51.134.197,False,Athens,GR
-185.51.134.198,False,,GR
 185.51.134.198,False,Athens,GR
+185.51.134.198,False,,GR
 185.51.134.199,False,Athens,GR
 185.51.134.200,False,Athens,GR
 185.51.134.201,False,Athens,GR
 185.51.134.202,False,Athens,GR
 185.76.11.18,False,Madrid,ES
-185.76.11.19,False,Madrid,ES
 185.76.11.19,False,,ES
+185.76.11.19,False,Madrid,ES
 185.76.11.20,False,Madrid,ES
 185.76.11.21,False,Madrid,ES
 185.76.11.23,False,Madrid,ES
-185.76.11.24,False,Madrid,ES
 185.76.11.24,False,,ES
+185.76.11.24,False,Madrid,ES
 185.76.11.25,False,Madrid,ES
 185.76.11.26,False,Madrid,ES
-185.90.60.211,False,,FI
 185.90.60.211,False,Helsinki,FI
+185.90.60.211,False,,FI
 185.90.60.212,False,Helsinki,FI
 185.90.60.213,False,Helsinki,FI
 185.90.60.214,False,Helsinki,FI
@@ -6496,8 +6526,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.93.3.201,False,Madrid,ES
 185.93.3.202,False,Madrid,ES
 185.93.3.203,False,Madrid,ES
-185.107.44.8,False,,NL
 185.107.44.8,False,Amsterdam,NL
+185.107.44.8,False,,NL
 185.107.44.46,False,Amsterdam,NL
 185.107.44.47,False,Amsterdam,NL
 185.107.44.53,False,Amsterdam,NL
@@ -6547,8 +6577,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.107.44.210,False,Amsterdam,NL
 185.107.44.218,False,Amsterdam,NL
 185.107.44.219,False,Amsterdam,NL
-185.107.44.228,False,,NL
 185.107.44.228,False,Amsterdam,NL
+185.107.44.228,False,,NL
 185.107.44.230,False,Amsterdam,NL
 185.107.44.236,False,Amsterdam,NL
 185.107.44.237,False,Amsterdam,NL
@@ -6596,8 +6626,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.156.46.34,False,Ashburn,US
 185.156.46.35,False,Ashburn,US
 185.156.46.36,False,Ashburn,US
-185.156.46.37,False,Ashburn,US
 185.156.46.37,False,,US
+185.156.46.37,False,Ashburn,US
 185.156.46.38,False,Ashburn,US
 185.156.46.39,False,Ashburn,US
 185.156.46.40,False,Ashburn,US
@@ -6699,8 +6729,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.162.16.188,False,Limassol,CY
 185.162.16.189,False,Limassol,CY
 185.162.16.190,False,Limassol,CY
-185.181.100.179,False,Bucharest,RO
 185.181.100.179,False,,RO
+185.181.100.179,False,Bucharest,RO
 185.181.100.180,False,Bucharest,RO
 185.181.100.181,False,Bucharest,RO
 185.181.100.182,False,Bucharest,RO
@@ -6757,8 +6787,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.220.69.188,False,New York,US
 185.220.69.189,False,New York,US
 185.220.69.190,False,New York,US
-185.229.25.117,False,Skopje,MK
 185.229.25.117,False,,MK
+185.229.25.117,False,Skopje,MK
 185.229.25.118,False,Skopje,MK
 185.229.25.119,False,Skopje,MK
 185.229.25.120,False,Skopje,MK
@@ -6822,6 +6852,7 @@ ExitIP,ServicesDown,City,ExitCountry
 185.230.126.148,False,Los Angeles,US
 185.230.126.149,False,Los Angeles,US
 185.230.126.150,False,Los Angeles,US
+185.230.126.150,False,,US
 185.230.126.194,False,Los Angeles,US
 185.230.126.195,False,Los Angeles,US
 185.230.126.196,False,Los Angeles,US
@@ -6846,8 +6877,8 @@ ExitIP,ServicesDown,City,ExitCountry
 185.245.84.108,False,Copenhagen,DK
 185.245.84.109,False,Copenhagen,DK
 185.245.84.110,False,Copenhagen,DK
-185.245.85.131,False,Bratislava,SK
 185.245.85.131,False,,SK
+185.245.85.131,False,Bratislava,SK
 185.245.85.132,False,Bratislava,SK
 185.245.85.133,False,Bratislava,SK
 185.245.85.134,False,Bratislava,SK
@@ -6976,8 +7007,8 @@ ExitIP,ServicesDown,City,ExitCountry
 188.214.152.236,False,Hanoi,VN
 188.214.152.237,False,Hanoi,VN
 188.214.152.238,False,Hanoi,VN
-188.215.235.83,False,Phnom Penh,KH
 188.215.235.83,False,,KH
+188.215.235.83,False,Phnom Penh,KH
 188.215.235.84,False,Phnom Penh,KH
 188.215.235.85,False,Phnom Penh,KH
 188.215.235.86,False,Phnom Penh,KH
@@ -7010,8 +7041,8 @@ ExitIP,ServicesDown,City,ExitCountry
 190.2.131.161,False,Amsterdam,NL
 190.2.131.167,False,Amsterdam,NL
 190.2.131.175,False,Amsterdam,NL
-190.2.132.125,False,Amsterdam,NL
 190.2.132.125,False,,NL
+190.2.132.125,False,Amsterdam,NL
 190.2.132.126,False,Amsterdam,NL
 190.2.132.127,False,Amsterdam,NL
 190.2.132.128,False,Amsterdam,NL
@@ -7129,8 +7160,8 @@ ExitIP,ServicesDown,City,ExitCountry
 193.9.39.22,False,Lomé,TG
 193.9.39.23,False,Lomé,TG
 193.9.39.24,False,Lomé,TG
-193.29.106.19,False,,DE
 193.29.106.19,False,Berlin,DE
+193.29.106.19,False,,DE
 193.29.106.20,False,Berlin,DE
 193.29.106.21,False,Berlin,DE
 193.29.106.22,False,Berlin,DE
@@ -7171,15 +7202,15 @@ ExitIP,ServicesDown,City,ExitCountry
 193.29.107.243,False,Copenhagen,DK
 193.29.107.244,False,Copenhagen,DK
 193.29.107.245,False,Copenhagen,DK
-193.29.107.246,False,,DK
 193.29.107.246,False,Copenhagen,DK
+193.29.107.246,False,,DK
 193.29.107.247,False,Copenhagen,DK
 193.29.107.248,False,Copenhagen,DK
 193.29.107.249,False,Copenhagen,DK
 193.29.107.250,False,Copenhagen,DK
 193.37.254.67,False,Phoenix,US
-193.37.254.68,False,Phoenix,US
 193.37.254.68,False,,US
+193.37.254.68,False,Phoenix,US
 193.37.254.69,False,Phoenix,US
 193.37.254.70,False,Phoenix,US
 193.37.254.71,False,Phoenix,US
@@ -7190,8 +7221,8 @@ ExitIP,ServicesDown,City,ExitCountry
 193.37.254.76,False,Phoenix,US
 193.37.254.77,False,Phoenix,US
 193.37.254.78,False,Phoenix,US
-193.37.254.179,False,Phoenix,US
 193.37.254.179,False,,US
+193.37.254.179,False,Phoenix,US
 193.37.254.180,False,Phoenix,US
 193.37.254.181,False,Phoenix,US
 193.37.254.182,False,Phoenix,US
@@ -7206,6 +7237,7 @@ ExitIP,ServicesDown,City,ExitCountry
 193.148.18.83,False,New York,US
 193.148.18.84,False,New York,US
 193.148.18.85,False,New York,US
+193.148.18.86,False,,US
 193.148.18.86,False,New York,US
 193.148.18.87,False,New York,US
 193.148.18.88,False,New York,US
@@ -7213,8 +7245,8 @@ ExitIP,ServicesDown,City,ExitCountry
 193.148.18.90,False,New York,US
 194.34.132.56,False,Helsinki,FI
 194.34.132.57,False,,FI
-194.34.132.57,False,Helsinki,FI
 194.34.132.57,False,,FI
+194.34.132.57,False,Helsinki,FI
 194.34.132.57,False,,FI
 194.34.132.58,False,Helsinki,FI
 194.34.132.59,False,Helsinki,FI
@@ -7247,8 +7279,8 @@ ExitIP,ServicesDown,City,ExitCountry
 194.114.136.221,False,Osaka,JP
 194.114.136.222,False,Osaka,JP
 194.126.177.9,False,,DE
-194.126.177.16,False,Frankfurt,DE
 194.126.177.16,False,,DE
+194.126.177.16,False,Frankfurt,DE
 194.126.177.17,False,Frankfurt,DE
 194.126.177.18,False,Frankfurt,DE
 194.126.177.19,False,Frankfurt,DE
@@ -7281,8 +7313,8 @@ ExitIP,ServicesDown,City,ExitCountry
 194.126.177.45,False,Frankfurt,DE
 194.126.177.46,False,Frankfurt,DE
 194.126.177.47,False,Frankfurt,DE
-194.126.177.48,False,Frankfurt,DE
 194.126.177.48,False,,DE
+194.126.177.48,False,Frankfurt,DE
 194.126.177.49,False,Frankfurt,DE
 194.126.177.50,False,Frankfurt,DE
 194.126.177.51,False,Frankfurt,DE
@@ -7301,8 +7333,8 @@ ExitIP,ServicesDown,City,ExitCountry
 194.126.177.64,False,Frankfurt,DE
 194.126.177.65,False,Frankfurt,DE
 194.126.177.66,False,Frankfurt,DE
-194.126.177.67,False,,DE
 194.126.177.67,False,Frankfurt,DE
+194.126.177.67,False,,DE
 194.126.177.68,False,Frankfurt,DE
 194.126.177.69,False,Frankfurt,DE
 194.126.177.70,False,Frankfurt,DE
@@ -7384,8 +7416,8 @@ ExitIP,ServicesDown,City,ExitCountry
 195.158.248.227,False,Lisbon,PT
 195.158.248.228,False,Lisbon,PT
 195.158.248.229,False,Lisbon,PT
-195.158.248.230,False,,PT
 195.158.248.230,False,Lisbon,PT
+195.158.248.230,False,,PT
 195.158.248.230,False,,PT
 195.158.248.231,False,Lisbon,PT
 195.158.248.232,False,Lisbon,PT
@@ -7394,8 +7426,8 @@ ExitIP,ServicesDown,City,ExitCountry
 195.181.167.194,False,Madrid,ES
 195.181.167.195,False,Madrid,ES
 195.181.167.196,False,Madrid,ES
-195.181.167.197,False,,ES
 195.181.167.197,False,Madrid,ES
+195.181.167.197,False,,ES
 195.181.167.198,False,Madrid,ES
 195.181.167.199,False,Madrid,ES
 195.181.167.200,False,Madrid,ES
@@ -7404,8 +7436,8 @@ ExitIP,ServicesDown,City,ExitCountry
 196.240.54.116,False,Riga,LV
 196.240.54.117,False,Riga,LV
 196.240.54.118,False,,LV
-196.240.54.118,False,Riga,LV
 196.240.54.118,False,,LV
+196.240.54.118,False,Riga,LV
 196.240.54.119,False,Riga,LV
 196.240.54.120,False,Riga,LV
 196.240.54.121,False,Riga,LV
@@ -7436,8 +7468,8 @@ ExitIP,ServicesDown,City,ExitCountry
 196.245.151.212,False,Bratislava,SK
 196.245.151.213,False,Bratislava,SK
 196.245.151.214,False,,SK
-196.245.151.214,False,,SK
 196.245.151.214,False,Bratislava,SK
+196.245.151.214,False,,SK
 196.245.151.215,False,Bratislava,SK
 196.245.151.216,False,Bratislava,SK
 196.245.151.217,False,Bratislava,SK
@@ -7512,8 +7544,8 @@ ExitIP,ServicesDown,City,ExitCountry
 217.138.193.104,False,Dubai,AE
 217.138.193.105,False,Dubai,AE
 217.138.193.106,False,Dubai,AE
-217.138.216.99,False,Berlin,DE
 217.138.216.99,False,,DE
+217.138.216.99,False,Berlin,DE
 217.138.216.100,False,Berlin,DE
 217.138.216.101,False,Berlin,DE
 217.138.216.102,False,Berlin,DE
