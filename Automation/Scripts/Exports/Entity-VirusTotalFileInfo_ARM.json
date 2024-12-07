@@ -1,0 +1,237 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "metadata": {
+        "title": "",
+        "description": "",
+        "prerequisites": "",
+    "postDeployment": [],
+    "prerequisitesDeployTemplateFile": "",
+    "lastUpdateTime": "",
+"entities": [],
+"tags": [],
+"support": {
+"tier": "community",
+"armtemplate": "Generated"
+},
+"author": {
+"name": ""
+}
+},
+"parameters": {
+"PlaybookName": {
+"defaultValue": "Entity-VirusTotalFileInfo",
+"type": "string"
+}
+},
+"variables": {},
+"resources": [
+{
+"properties": {
+"provisioningState": "Succeeded",
+"state": "Enabled",
+"definition": {
+    "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "$connections": {
+        "defaultValue": {},
+        "type": "Object"
+    }
+},
+"triggers": {
+    "Microsoft_Sentinel_entity": {
+        "type": "ApiConnectionWebhook",
+        "inputs": {
+            "body": {
+                "callback_url": "@{listCallbackUrl()}"
+            },
+            "host": {
+                "connection": {
+                    "name": "@parameters('$connections')['azuresentinel_3']['connectionId']"
+                }
+            },
+            "path": "/entity/@{encodeURIComponent('FileHash')}"
+        }
+    }
+},
+"actions": {
+    "Condition_2": {
+        "actions": {
+            "Add_comment_to_incident_(V3)": {
+                "runAfter": {
+                    "Send_Data": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection",
+                "inputs": {
+                    "body": {
+                        "incidentArmId": "@triggerBody()?['IncidentArmID']",
+                        "message": "<p>Virus Total File Report found for @{triggerBody()?['Entity']?['properties']?['Value']}<br>\nReputation is:@{body('Retrieve_information_about_a_file')?['data']?['attributes']?['reputation']} which indicates likely harmless<br>\nQuery: VTFileReport_CL | where id_s == \"@{triggerBody()?['Entity']?['properties']?['Value']}\"</p>"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azuresentinel_3']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/Incidents/Comment"
+                }
+            },
+            "Send_Data": {
+            "runAfter": {},
+            "type": "ApiConnection",
+            "inputs": {
+                "body": "@{body('Retrieve_information_about_a_file')?['data']}",
+                "headers": {
+                    "Log-Type": "VTFileReport",
+                    "time-generated-field": "@{utcNow()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['azureloganalyticsdatacollector_1']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/api/logs"
+            }
+        }
+    },
+    "runAfter": {
+        "Retrieve_information_about_a_file": [
+            "Succeeded"
+        ]
+    },
+    "else": {
+        "actions": {
+            "Add_comment_to_incident_(V3)_2": {
+                "runAfter": {
+                    "Send_Data_2": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "ApiConnection",
+                "inputs": {
+                    "body": {
+                        "incidentArmId": "@triggerBody()?['IncidentArmID']",
+                        "message": "<p>Virus Total File Report found for @{triggerBody()?['Entity']?['properties']?['Value']}<br>\nReputation is:@{body('Retrieve_information_about_a_file')?['data']?['attributes']?['reputation']} which indicates likely malicous<br>\nQuery: VTFileReport_CL | where id_s == \"@{triggerBody()?['Entity']?['properties']?['Value']}\"</p>"
+                    },
+                    "host": {
+                        "connection": {
+                            "name": "@parameters('$connections')['azuresentinel_3']['connectionId']"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/Incidents/Comment"
+                }
+            },
+            "Send_Data_2": {
+            "runAfter": {},
+            "type": "ApiConnection",
+            "inputs": {
+                "body": "@{body('Retrieve_information_about_a_file')?['data']}",
+                "headers": {
+                    "Log-Type": "VTFileReport",
+                    "time-generated-field": "@{utcNow()}"
+                },
+                "host": {
+                    "connection": {
+                        "name": "@parameters('$connections')['azureloganalyticsdatacollector_1']['connectionId']"
+                    }
+                },
+                "method": "post",
+                "path": "/api/logs"
+            }
+        }
+    }
+},
+"expression": {
+    "and": [
+        {
+            "greater": [
+                "@body('Retrieve_information_about_a_file')?['data']?['attributes']?['reputation']",
+                0
+            ]
+        }
+    ]
+},
+"type": "If"
+},
+"Initialize_HashInfo": {
+"runAfter": {},
+"type": "InitializeVariable",
+"inputs": {
+"variables": [
+    {
+        "name": "HashInfo",
+        "type": "array"
+    }
+]
+}
+},
+"Retrieve_information_about_a_file": {
+"runAfter": {
+"Initialize_HashInfo": [
+    "Succeeded"
+]
+},
+"type": "ApiConnection",
+"inputs": {
+"host": {
+    "connection": {
+        "name": "@parameters('$connections')['virustotal_1']['connectionId']"
+    }
+},
+"method": "get",
+"path": "/api/v3/files/@{encodeURIComponent(triggerBody()?['Entity']?['properties']?['Value'])}"
+}
+}
+}
+},
+"parameters": {
+"$connections": {
+"value": {
+"azureloganalyticsdatacollector_1": {
+"connectionId": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/resourceGroups/STL-SEC-AUTOMATION-RG/providers/Microsoft.Web/connections/azureloganalyticsdatacollector",
+"connectionName": "azureloganalyticsdatacollector",
+"id": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/providers/Microsoft.Web/locations/uksouth/managedApis/azureloganalyticsdatacollector"
+},
+"azuresentinel_3": {
+"connectionId": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/resourceGroups/STL-SEC-AUTOMATION-RG/providers/Microsoft.Web/connections/azuresentinel-6",
+"connectionName": "azuresentinel-6",
+"connectionProperties": {
+    "authentication": {
+        "type": "ManagedServiceIdentity"
+    }
+},
+"id": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/providers/Microsoft.Web/locations/uksouth/managedApis/azuresentinel"
+},
+"virustotal_1": {
+"connectionId": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/resourceGroups/STL-SEC-AUTOMATION-RG/providers/Microsoft.Web/connections/virustotal",
+"connectionName": "virustotal",
+"id": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/providers/Microsoft.Web/locations/uksouth/managedApis/virustotal"
+}
+}
+}
+}
+},
+"name": "[parameters('PlaybookName')]",
+"type": "Microsoft.Logic/workflows",
+"location": "[resourceGroup().location]",
+"tags": {
+"Application": "Sentinel",
+"Environment": "Azure",
+"Purpose": "Virus Total",
+"hidden-SentinelWorkspaceId": "/subscriptions/5305ccd2-977a-4630-843b-bad582e756a3/resourceGroups/STL-SEC-AUTOMATION-RG/providers/microsoft.OperationalInsights/Workspaces/stl-sec-siem-law",
+"hidden-SentinelTemplateName": "Entity-VirusTotalFileInfo",
+"hidden-SentinelTemplateVersion": "1.0"
+},
+"identity": {
+"type": "SystemAssigned"
+},
+"apiVersion": "2017-07-01",
+"dependsOn": []
+}
+]
+}
