@@ -21,7 +21,7 @@
 .AUTHOR
     noodlemctwoodle
 
-    Thanks to ThijsLecomte for Playbook-ARM-Template-Generator script, which was used as a reference.
+    Thanks to Sreedhar Ande for Playbook-ARM-Template-Generator script, which was used as a reference.
 
 .VERSION
     1.0.0
