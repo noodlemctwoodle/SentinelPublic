@@ -41,292 +41,336 @@ param(
     [string]$TenantId
 )
 
-# Define the default folder where outputs will be saved.
-$defaultExportFolder = Join-Path $PWD "Exports"
-
 Write-Host "************************************************************" -ForegroundColor Green
-Write-Host "*          Logic App ARM Template Export Script             *" -ForegroundColor Green
+Write-Host "*          Logic App ARM Template Export Script            *" -ForegroundColor Green
 Write-Host "************************************************************" -ForegroundColor Green
 Write-Host "This script will help you select and export Logic Apps as ARM templates." -ForegroundColor Green
 Write-Host "By default, the output will be saved to:" -ForegroundColor Green
-Write-Host "`t$defaultExportFolder" -ForegroundColor Green
+Write-Host        "$PSScriptRoot" -ForegroundColor Red
 Write-Host "You can choose to change this location if desired." -ForegroundColor Green
 Write-Host "Running on PowerShell 7+, multi-platform compatible." -ForegroundColor Green
 Write-Host "************************************************************" -ForegroundColor Green
 Write-Host ""
 
-# Check if Az.Accounts is installed
-if (-not (Get-Module -ListAvailable -Name Az.Accounts)) {
-    Write-Host "The Az.Accounts module is required to connect to Azure and manage subscriptions."
-
-    $AzAccountsQuestion = "Do you want to install Az.Accounts now?"
-    $AzAccountsChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
-    $AzAccountsChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Install the Az.Accounts module'))
-    $AzAccountsChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Do not install and exit'))
-
-    $AzAccountsDecision = $Host.UI.PromptForChoice(
-        "Install Az.Accounts",
-        $AzAccountsQuestion,
-        $AzAccountsChoices,
-        1
-    )
-
-    if ($AzAccountsDecision -eq 0) {
-        # User chose to install the module
-        try {
-            Install-Module Az.Accounts -Scope CurrentUser -Force
-            Import-Module Az.Accounts -ErrorAction Stop
-            Write-Host "Az.Accounts module installed successfully."
-        } catch {
-            Write-Host "Failed to install Az.Accounts: $($_.Exception.Message)" -ForegroundColor Red
-            Write-Host "Exiting..."
-            exit
-        }
-    } else {
-        # User chose not to install, exit the script
-        Write-Host "Cannot proceed without Az.Accounts. Exiting..."
-        exit
-    }
-} else {
-    # Module is already installed, just import it
-    Import-Module Az.Accounts -ErrorAction SilentlyContinue
-}
-
-# Check if Microsoft.PowerShell.ConsoleGuiTools is installed, if not prompt to install
-if (-not (Get-Module -ListAvailable -Name Microsoft.PowerShell.ConsoleGuiTools)) {
-    Write-Host "The Microsoft.PowerShell.ConsoleGuiTools module is required for Out-ConsoleGridView."
-
-    $ConsoleGuiToolsQuestion = "Do you want to install Microsoft.PowerShell.ConsoleGuiTools now?"
-    $ConsoleGuiToolsChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
-    $ConsoleGuiToolsChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Install the ConsoleGuiTools module'))
-    $ConsoleGuiToolsChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Do not install and exit'))
-
-    $ConsoleGuiToolsDecision = $Host.UI.PromptForChoice(
-        "Install ConsoleGuiTools",
-        $ConsoleGuiToolsQuestion,
-        $ConsoleGuiToolsChoices,
-        1
-    )
-
-    if ($ConsoleGuiToolsDecision -eq 0) {
-        # User chose to install the module
-        try {
-            Install-Module Microsoft.PowerShell.ConsoleGuiTools -Scope CurrentUser -Force
-            Import-Module Microsoft.PowerShell.ConsoleGuiTools -ErrorAction Stop
-            Write-Host "Microsoft.PowerShell.ConsoleGuiTools module installed successfully."
-        } catch {
-            Write-Host "Failed to install Microsoft.PowerShell.ConsoleGuiTools: $($_.Exception.Message)" -ForegroundColor Red
-            Write-Host "Exiting..."
-            exit
-        }
-    } else {
-        # User chose not to install, exit the script
-        Write-Host "Cannot proceed without Microsoft.PowerShell.ConsoleGuiTools. Exiting..."
-        exit
-    }
-} else {
-    # Module is already installed, just import it
-    Import-Module Microsoft.PowerShell.ConsoleGuiTools -ErrorAction SilentlyContinue
-}
-
-# Prompt user if they want to change the export location from the default.
-$ChangeLocationQuestion = "Would you like to change the default export location?"
-$ChangeLocationChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
-$ChangeLocationChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Change the export folder location'))
-$ChangeLocationChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Use the default export folder location'))
-
-$ChangeLocationDecision = $Host.UI.PromptForChoice(
-    "Change Export Location",
-    $ChangeLocationQuestion,
-    $ChangeLocationChoices,
-    1
-)
-
-if ($ChangeLocationDecision -eq 0) {
-    # User chose to change the export location.
-    # We'll start from the user's home directory and let them pick a subdirectory via Out-ConsoleGridView.
-    $startingPath = $HOME
-    Write-Host "Selecting export folder from directories under: $startingPath"
-    $directories = Get-ChildItem -Directory -Path $startingPath | Select-Object Name,FullName
-
-    # Present directories in a grid view for selection.
-    $selectedDirectory = $directories | Out-ConsoleGridView -Title "Select Export Folder (Press ENTER when done)" -OutputMode Single
-
-    if (-not $selectedDirectory) {
-        # If no directory was selected, fall back to the default export folder.
-        Write-Host "No directory selected. Using default location: $defaultExportFolder" -ForegroundColor Yellow
-        $exportFolder = $defaultExportFolder
-    } else {
-        # User selected a directory; use it as the export folder.
-        Write-Host "Selected directory: $($selectedDirectory.FullName)" -ForegroundColor Green
-        $exportFolder = $selectedDirectory.FullName
-
-        # If the directory doesn't exist, try to create it.
-        if (-not (Test-Path $exportFolder)) {
-            Write-Host "Directory does not exist. Attempting to create $exportFolder" -ForegroundColor Yellow
-            try {
-                New-Item -ItemType Directory -Path $exportFolder -Force | Out-Null
-                Write-Host "Directory created: $exportFolder" -ForegroundColor Green
-            } catch {
-                # If directory creation fails, revert to default export folder.
-                Write-Host "Failed to create directory at '$exportFolder'. Using default location." -ForegroundColor Red
-                $exportFolder = $defaultExportFolder
-            }
-        }
-    }
-} else {
-    # User chose not to change the location, use the default export folder.
-    $exportFolder = $defaultExportFolder
-}
-
-# Display the final chosen export folder path.
-Write-Host "Final export folder: $exportFolder" -ForegroundColor Green
-
-# Ensure the export folder actually exists; create it if not.
-#if (-not (Test-Path $exportFolder)) {
-#    New-Item -Path $exportFolder -ItemType Directory | Out-Null
-#}
-
-# A simple logging function to write messages with severity.
 Function Write-Log {
     param(
         [Parameter(Mandatory=$true)][string]$Message,
-        [string]$Severity = 'Information'
+        [ValidateSet("Information", "Warning", "Error", "Debug")][string]$Severity = 'Information'
     )
-    Write-Host "[$Severity] $Message"
+
+    # Get the script root directory
+    $ScriptRoot = $PSScriptRoot
+    if (-not $ScriptRoot) {
+        $ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
+        if (-not $ScriptRoot) {
+            $ScriptRoot = (Get-Location).Path
+        }
+    }
+
+    # Define the log file path
+    $LogFile = Join-Path -Path $ScriptRoot -ChildPath "ScriptLog.txt"
+
+    # Build the log entry with timestamp and severity
+    $TimeStamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+    $LogEntry = "[$TimeStamp] [$Severity] $Message"
+
+    # Write to the console with appropriate color
+    switch ($Severity) {
+        #"Information" { Write-Host $LogEntry -ForegroundColor Green }
+        "Warning"     { Write-Host $LogEntry -ForegroundColor Yellow }
+        "Error"       { Write-Host $LogEntry -ForegroundColor Red }
+        "Debug"       { Write-Host $LogEntry -ForegroundColor Cyan }
+    }
+
+    # Append to the log file
+    try {
+        Add-Content -Path $LogFile -Value $LogEntry
+    } catch {
+        Write-Host "Failed to write log to file: $($_.Exception.Message)" -ForegroundColor Red
+    }
 }
 
-# Import the Az.Accounts module to allow Azure login and context commands.
-Import-Module Az.Accounts -ErrorAction Stop
+Function Initialize-ExportFolder {
+    param (
+        [string]$DefaultExportFolder
+    )
 
-# Prompt the user whether they want to generate the ARM template with gallery-specific configurations.
-$TemplateGalleryQuestion = "Generate ARM Template for Gallery?"
-$TemplateGalleryChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
-$TemplateGalleryChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Generate the ARM template with gallery-specific configurations'))
-$TemplateGalleryChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Generate a standard ARM template without gallery-specific configurations'))
+    # Log the start of the folder initialization process
+    Write-Log -Message "Initializing export folder. Default location: $DefaultExportFolder" -Severity "Information"
 
-$TemplateGalleryDecision = $Host.UI.PromptForChoice(
-    "Gallery Template Generation",
-    $TemplateGalleryQuestion,
-    $TemplateGalleryChoices,
-    1
-)
-$GenerateForGallery = $TemplateGalleryDecision -eq 0
+    # Prompt user if they want to change the export location from the default.
+    $ChangeLocationQuestion = "Would you like to change the default export location?"
+    $ChangeLocationChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
+    $ChangeLocationChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Change the export folder location'))
+    $ChangeLocationChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Use the default export folder location'))
 
-# Prompt user if they want to update Az modules to latest versions.
-$UpdateModulesQuestion = "Do you want to update required Az Modules to latest version?"
-$UpdateModulesChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
-$UpdateModulesChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Attempt to update Az modules to the latest version'))
-$UpdateModulesChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Use currently installed Az modules'))
+    $ChangeLocationDecision = $Host.UI.PromptForChoice(
+        "Change Export Location",
+        $ChangeLocationQuestion,
+        $ChangeLocationChoices,
+        1
+    )
 
-$UpdateModulesDecision = $Host.UI.PromptForChoice(
-    "Update Az Modules",
-    $UpdateModulesQuestion,
-    $UpdateModulesChoices,
-    1
-)
-$UpdateAzModules = $UpdateModulesDecision -eq 0
+    if ($ChangeLocationDecision -eq 0) {
+        # User chose to change the export location.
+        $startingPath = $HOME
+        Write-Log -Message "User chose to change the export location. Starting path: $startingPath" -Severity "Information"
 
-# Function to update Az modules if requested.
+        # Get list of directories to present for selection
+        try {
+            $directories = Get-ChildItem -Directory -Path $startingPath | Select-Object Name,FullName
+            Write-Log -Message "Directories retrieved for selection." -Severity "Debug"
+        } catch {
+            Write-Log -Message "Failed to retrieve directories: $($_.Exception.Message)" -Severity "Error"
+            exit 1
+        }
+
+        # Present directories in a grid view for selection.
+        $selectedDirectory = $directories | Out-ConsoleGridView -Title "Select Export Folder (Press ENTER when done)" -OutputMode Single
+
+        if (-not $selectedDirectory) {
+            # If no directory was selected, notify and fallback to default location.
+            Write-Log -Message "No directory selected. Falling back to default location: $DefaultExportFolder" -Severity "Warning"
+            $ExportFolder = $DefaultExportFolder
+        } else {
+            # User selected a directory; use it as the export folder.
+            Write-Log -Message "User selected export folder: $($selectedDirectory.FullName)" -Severity "Information"
+            $ExportFolder = $selectedDirectory.FullName
+        }
+    } else {
+        # User chose to use the default location.
+        Write-Log -Message "User chose to use the default export location: $DefaultExportFolder" -Severity "Information"
+        $ExportFolder = $DefaultExportFolder
+    }
+
+    # Ensure the selected or default export folder exists.
+    if (-not (Test-Path -Path $ExportFolder)) {
+        Write-Log -Message "Export folder does not exist. Creating: $ExportFolder" -Severity "Warning"
+        try {
+            New-Item -Path $ExportFolder -ItemType Directory -Force | Out-Null
+            Write-Log -Message "Export folder created successfully: $ExportFolder" -Severity "Information"
+        } catch {
+            Write-Log -Message "Failed to create export folder: $ExportFolder. Error: $($_.Exception.Message)" -Severity "Error"
+            exit 1
+        }
+    } else {
+        Write-Log -Message "Export folder already exists: $ExportFolder" -Severity "Information"
+    }
+
+    # Return the selected or default export folder.
+    Write-Log -Message "Export folder initialization complete. Folder path: $ExportFolder" -Severity "Information"
+    return $ExportFolder
+}
+
+# Initialize default folder
+$ScriptRoot = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$DefaultExportFolder = Join-Path $ScriptRoot "Exports"
+Write-Log -Message "Default export folder path: $DefaultExportFolder" -Severity "Debug"
+
+$ExportFolder = Initialize-ExportFolder -DefaultExportFolder $DefaultExportFolder
+
+Write-Log -Message "Export folder is set to: $ExportFolder" -Severity "Information"
+
+Function Ensure-Module {
+    param (
+        [string]$ModuleName,
+        [string]$InstallMessage,
+        [string]$InstallCommand
+    )
+    Write-Log -Message "Checking if module '$ModuleName' is installed..." -Severity "Information"
+
+    if (-not (Get-Module -ListAvailable -Name $ModuleName)) {
+        Write-Log -Message "Module '$ModuleName' is not installed. Prompting user for installation." -Severity "Warning"
+
+        $InstallQuestion = "The $ModuleName module is required. Do you want to install it now?"
+        $InstallChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
+        $InstallChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', "Install the $ModuleName module"))
+        $InstallChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', "Do not install and exit"))
+
+        $InstallDecision = $Host.UI.PromptForChoice(
+            "Install $ModuleName",
+            $InstallQuestion,
+            $InstallChoices,
+            1
+        )
+
+        if ($InstallDecision -eq 0) {
+            Write-Log -Message "$InstallMessage" -Severity "Information"
+            try {
+                Invoke-Expression $InstallCommand
+                Import-Module $ModuleName -ErrorAction Stop
+                Write-Log -Message "Module '$ModuleName' installed and imported successfully." -Severity "Information"
+            } catch {
+                Write-Log -Message "Failed to install module '$ModuleName': $($_.Exception.Message)" -Severity "Error"
+                Write-Log -Message "Exiting script due to missing required module." -Severity "Error"
+                exit 1
+            }
+        } else {
+            Write-Log -Message "User chose not to install module '$ModuleName'. Exiting..." -Severity "Error"
+            exit 1
+        }
+    } else {
+        Write-Log -Message "Module '$ModuleName' is already installed. Importing..." -Severity "Information"
+        Import-Module $ModuleName -ErrorAction SilentlyContinue
+    }
+}
+
+Function Prompt-ForChoice {
+    param (
+        [string]$Title,
+        [string]$Question,
+        [System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]]$Choices,
+        [int]$DefaultChoice = 1
+    )
+
+    Write-Log -Message "Prompting user: $Question" -Severity "Information"
+    $Decision = $Host.UI.PromptForChoice($Title, $Question, $Choices, $DefaultChoice)
+    return $Decision
+}
+
 Function Update-AzModulesIfNeeded {
     param(
         [bool]$ShouldUpdate
     )
+
     if ($ShouldUpdate) {
-        Write-Host "Updating Az Modules to the latest version..."
-        Try {
+        Write-Log -Message "Updating Az Modules to the latest version..." -Severity "Information"
+        try {
             Install-Module Az -Scope CurrentUser -Force -ErrorAction Stop
             Import-Module Az -Force -ErrorAction Stop
-            Write-Host "Az Modules successfully updated."
+            Write-Log -Message "Az Modules successfully updated." -Severity "Information"
+        } catch {
+            Write-Log -Message "Failed to update Az Modules: $($_.Exception.Message)" -Severity "Error"
         }
-        catch {
-            Write-Host "Failed to update Az Modules: $($_.Exception.Message)" -ForegroundColor Red
-        }
-    }
-    else {
-        Write-Host "Skipping Az Module update."
+    } else {
+        Write-Log -Message "Skipping Az Module update as per user choice." -Severity "Information"
     }
 }
 
-# Update Az modules if user chose to do so.
-Update-AzModulesIfNeeded -ShouldUpdate:$UpdateAzModules
+# Main script logic starts here
+Write-Log -Message "Starting script. Checking required modules..." -Severity "Information"
 
-# If TenantId not supplied, let the user select the tenant.
+# Ensure Az.Accounts module is installed
+Ensure-Module -ModuleName "Az.Accounts" `
+              -InstallMessage "Installing Az.Accounts module. This may take a few moments..." `
+              -InstallCommand "Install-Module Az.Accounts -Scope CurrentUser -Force"
+
+# Ensure Microsoft.PowerShell.ConsoleGuiTools module is installed
+Ensure-Module -ModuleName "Microsoft.PowerShell.ConsoleGuiTools" `
+              -InstallMessage "Installing Microsoft.PowerShell.ConsoleGuiTools module. This may take a few moments..." `
+              -InstallCommand "Install-Module Microsoft.PowerShell.ConsoleGuiTools -Scope CurrentUser -Force"
+
+# Prompt user for gallery template generation
+$TemplateGalleryChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
+$TemplateGalleryChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Generate the ARM template with gallery-specific configurations'))
+$TemplateGalleryChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Generate a standard ARM template without gallery-specific configurations'))
+
+$TemplateGalleryDecision = Prompt-ForChoice -Title "Gallery Template Generation" `
+                                             -Question "Generate ARM Template for Gallery?" `
+                                             -Choices $TemplateGalleryChoices `
+                                             -DefaultChoice 1
+$GenerateForGallery = $TemplateGalleryDecision -eq 0
+Write-Log -Message "User decision for gallery template generation: $GenerateForGallery" -Severity "Information"
+
+# Prompt user for Az module updates
+$UpdateModulesChoices = New-Object System.Collections.ObjectModel.Collection[System.Management.Automation.Host.ChoiceDescription]
+$UpdateModulesChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&Yes', 'Attempt to update Az modules to the latest version'))
+$UpdateModulesChoices.Add((New-Object System.Management.Automation.Host.ChoiceDescription -ArgumentList '&No', 'Use currently installed Az modules'))
+
+$UpdateModulesDecision = Prompt-ForChoice -Title "Update Az Modules" `
+                                           -Question "Do you want to update required Az Modules to the latest version?" `
+                                           -Choices $UpdateModulesChoices `
+                                           -DefaultChoice 1
+$UpdateAzModules = $UpdateModulesDecision -eq 0
+
+# Update Az modules if needed
+Update-AzModulesIfNeeded -ShouldUpdate $UpdateAzModules
+
+Write-Log -Message "Script initialization complete. Proceeding with main logic." -Severity "Information"
+
+## If TenantId not supplied, prompt the user to select a tenant
 if (-not $TenantId) {
-    Write-Host "Retrieving available tenants..."
+    Write-Log -Message "TenantId not supplied. Retrieving available tenants..." -Severity "Information"
+
     $tenants = Get-AzTenant
     if ($tenants.Count -gt 1) {
-        Write-Host "Select Tenant:"
+        Write-Log -Message "Multiple tenants found. Prompting user to select one." -Severity "Information"
+
         $selectedTenant = $tenants | Out-ConsoleGridView -Title "Select Tenant" -OutputMode Single
         if (-not $selectedTenant) {
-            Write-Host "No Tenant selected. Exiting..."
+            Write-Log -Message "No tenant selected. Exiting..." -Severity "Error"
             exit
         }
         $TenantId = $selectedTenant.TenantId
+        Write-Log -Message "Selected TenantId: $TenantId" -Severity "Information"
     } else {
-        # Only one tenant found, use it automatically.
+        # Only one tenant found, use it automatically
         $TenantId = $tenants[0].TenantId
+        Write-Log -Message "Only one tenant found. Using TenantId: $TenantId" -Severity "Information"
     }
 }
 
-Write-Host "Connecting to Azure with TenantId: $TenantId..."
+Write-Log -Message "Connecting to Azure with TenantId: $TenantId" -Severity "Information"
 Connect-AzAccount -Tenant $TenantId | Out-Null
 
-# Let the user select a subscription from the available subscriptions.
-Write-Host "Retrieving subscriptions..."
+# Retrieve subscriptions for the tenant
+Write-Log -Message "Retrieving subscriptions for TenantId: $TenantId" -Severity "Information"
 $subscriptions = Get-AzSubscription -TenantId $TenantId
 if (-not $subscriptions) {
-    Write-Host "No subscriptions found."
+    Write-Log -Message "No subscriptions found for TenantId: $TenantId. Exiting..." -Severity "Error"
     exit
 }
 
-Write-Host "Select Subscription:"
+Write-Log -Message "Prompting user to select a subscription." -Severity "Information"
 $selectedSubscription = $subscriptions | Select-Object Name, SubscriptionId, State |
     Out-ConsoleGridView -Title "Select Subscription" -OutputMode Single
 if (-not $selectedSubscription) {
-    Write-Host "No Subscription selected. Exiting..."
+    Write-Log -Message "No subscription selected. Exiting..." -Severity "Error"
     exit
 }
+Write-Log -Message "Selected Subscription: $($selectedSubscription.Name) with SubscriptionId: $($selectedSubscription.SubscriptionId)" -Severity "Information"
 
-# Set the context to the selected subscription.
+# Set the context to the selected subscription
+Write-Log -Message "Setting context to SubscriptionId: $($selectedSubscription.SubscriptionId)" -Severity "Information"
 $null = Set-AzContext -SubscriptionId $selectedSubscription.SubscriptionId -Tenant $TenantId
 
-# Let the user select a Resource Group.
-Write-Host "Retrieving Resource Groups for subscription: $($selectedSubscription.Name)"
+# Retrieve resource groups for the selected subscription
+Write-Log -Message "Retrieving resource groups for subscription: $($selectedSubscription.Name)" -Severity "Information"
 $resourceGroups = Get-AzResourceGroup
 if (-not $resourceGroups) {
-    Write-Host "No Resource Groups found in this subscription."
+    Write-Log -Message "No resource groups found in subscription: $($selectedSubscription.Name). Exiting..." -Severity "Error"
     exit
 }
 
-Write-Host "Select Resource Group:"
-$selectedResourceGroup = $resourceGroups | Select-Object ResourceGroupName, Location | Out-ConsoleGridView -Title "Select Resource Group" -OutputMode Single
+Write-Log -Message "Prompting user to select a resource group." -Severity "Information"
+$selectedResourceGroup = $resourceGroups | Select-Object ResourceGroupName, Location | 
+    Out-ConsoleGridView -Title "Select Resource Group" -OutputMode Single
 if (-not $selectedResourceGroup) {
-    Write-Host "No Resource Group selected. Exiting..."
+    Write-Log -Message "No resource group selected. Exiting..." -Severity "Error"
     exit
 }
+Write-Log -Message "Selected Resource Group: $($selectedResourceGroup.ResourceGroupName)" -Severity "Information"
 
-# Retrieve all Logic Apps (workflows) in the chosen Resource Group.
-Write-Host "Retrieving Logic Apps in Resource Group: $($selectedResourceGroup.ResourceGroupName)..."
+# Retrieve Logic Apps in the selected resource group
+Write-Log -Message "Retrieving Logic Apps in Resource Group: $($selectedResourceGroup.ResourceGroupName)" -Severity "Information"
 $logicApps = Get-AzResource -ResourceGroupName $selectedResourceGroup.ResourceGroupName -ResourceType "Microsoft.Logic/workflows" -ExpandProperties
-
 if (-not $logicApps) {
-    Write-Host "No Logic Apps found in Resource Group '$($selectedResourceGroup.ResourceGroupName)'."
+    Write-Log -Message "No Logic Apps found in Resource Group: $($selectedResourceGroup.ResourceGroupName). Exiting..." -Severity "Error"
     exit
 }
+Write-Log -Message "Found $($logicApps.Count) Logic App(s) in Resource Group: $($selectedResourceGroup.ResourceGroupName)" -Severity "Information"
 
-Write-Host "Use arrow keys to navigate, spacebar to select, and Enter to confirm your selection."
-Write-Host "Press 'q' in the console grid view to exit without selection."
-
-# Let the user select one or multiple Logic Apps to export.
+# Prompt user to select one or multiple Logic Apps to export
+Write-Log -Message "Prompting user to select Logic Apps for export." -Severity "Information"
 $selectedLogicApps = $logicApps |
     Select-Object ResourceGroupName, Name, Location, @{Name='Kind';Expression={$_.Properties.kind}}, @{Name='State';Expression={$_.Properties.state}} |
     Out-ConsoleGridView -Title "Select Logic Apps to Export as ARM Templates (Press ENTER when done)"
 
 if (-not $selectedLogicApps) {
-    Write-Host "No Logic Apps selected. Exiting..."
+    Write-Log -Message "No Logic Apps selected. Exiting..." -Severity "Error"
     exit
 }
+Write-Log -Message "User selected $($selectedLogicApps.Count) Logic App(s) for export." -Severity "Information"
 
 # Setup variables for ARM template generation.
 $armHostUrl = "https://management.azure.com"
@@ -606,7 +650,7 @@ Function BuildArmTemplate($playbookResource) {
     }
 }
 
-Write-Host "Exporting selected Logic Apps as ARM templates..."
+Write-Log "Exporting selected Logic Apps as ARM templates..."
 
 # Export each selected Logic App as an ARM template.
 foreach ($app in $selectedLogicApps) {
@@ -626,7 +670,7 @@ foreach ($app in $selectedLogicApps) {
     # Get the playbook resource in a form suitable for ARM template export.
     $playbookResource = GetPlaybookResource
     if ($null -eq $playbookResource) {
-        Write-Host "Could not build ARM template for '$name'. Skipping..." -ForegroundColor Yellow
+        Write-Log "Could not build ARM template for '$name'. Skipping..." -Severity Error
         continue
     }
 
@@ -647,10 +691,10 @@ foreach ($app in $selectedLogicApps) {
     $armFileName = Join-Path $exportFolder "$($name)_ARM.json"
     try {
         $armTemplateJson | Out-File -FilePath $armFileName -Encoding UTF8
-        Write-Host "Exported ARM Template for '$name' to '$armFileName'"
+        Write-Log "Exported ARM Template for '$name' to '$armFileName'" -Severity Information
     } catch {
-        Write-Host "Failed to export ARM Template for '$name': $($_.Exception.Message)" -ForegroundColor Red
+        Write-Log "Failed to export ARM Template for '$name': $($_.Exception.Message)" -Severity Error
     }
 }
 
-Write-Host "Export complete. Check the 'Exports' folder for the ARM template files."
+Write-Log "Export complete. Check the 'Exports' folder for the ARM template files." -Severity Information
