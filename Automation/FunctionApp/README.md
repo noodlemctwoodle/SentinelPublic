@@ -113,9 +113,9 @@ The function includes robust error-handling mechanisms:
 3. Logging: Logs errors for failed queries, API calls, or event processing.
 4. Batch Processing Protection: Ensures incomplete batches don’t corrupt data collection.
 
-#### Rate Limiting Protection
+## Rate Limiting Protection
 
-The function implements sophisticated rate limiting protection to handle Microsoft Graph API's throttling mechanisms:
+The function implements rate limiting protection to handle Microsoft Graph API's throttling mechanisms:
 
 ### HTTP 429 Response Handling
 
