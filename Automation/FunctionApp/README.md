@@ -73,7 +73,7 @@ The Azure Function uses an Event Hub output binding to forward events. Each forw
 
 ## Function Configuration
 
-function.json
+`function.json`
 
 Define the timer trigger and Event Hub output binding in the function.json file:
 
