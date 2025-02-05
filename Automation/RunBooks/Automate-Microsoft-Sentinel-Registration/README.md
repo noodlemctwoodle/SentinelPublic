@@ -1,4 +1,4 @@
-# Expiring Azure AD App Registrations Notification
+# Expiring Entra ID App Registrations Notification
 
 This project provides an automated solution to monitor EntraID App Registrations for expiring credentials (both secrets and certificates) and send an email notification via a Logic App. The solution leverages an Azure Automation runbook that connects to Microsoft Graph using a system-assigned managed identity, retrieves applications and their credentials, and then posts a flat JSON payload to a Logic App endpoint. The Logic App, in turn, uses an email template to alert stakeholders of upcoming expirations.
 
