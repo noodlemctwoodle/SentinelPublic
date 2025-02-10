@@ -63,13 +63,14 @@ foreach ($app in $applications) {
                 continue
             }
             $daysUntilExpiry = ($expiryDate - (Get-Date)).Days
-            if ($daysUntilExpiry -le $ExpiryThreshold -and $daysUntilExpiry -gt 0) {
+            if ($daysUntilExpiry -le $ExpiryThreshold) { 
                 $flatResults += [PSCustomObject]@{
                     ApplicationName = $app.DisplayName
                     ApplicationId   = $app.AppId
                     CredentialType  = "Secret"
                     ExpiryDate      = $expiryDate.ToString("dd-MM-yyyy HH:mm:ss")
                     DaysUntilExpiry = $daysUntilExpiry
+                    Status          = if ($daysUntilExpiry -le 0) { "Expired" } else { "Expiring Soon" }
                 }
             }
         }
@@ -90,13 +91,14 @@ foreach ($app in $applications) {
                 continue
             }
             $daysUntilExpiry = ($expiryDate - (Get-Date)).Days
-            if ($daysUntilExpiry -le $ExpiryThreshold -and $daysUntilExpiry -gt 0) {
+            if ($daysUntilExpiry -le $ExpiryThreshold) {  
                 $flatResults += [PSCustomObject]@{
                     ApplicationName = $app.DisplayName
                     ApplicationId   = $app.AppId
                     CredentialType  = "Certificate"
                     ExpiryDate      = $expiryDate.ToString("dd-MM-yyyy HH:mm:ss")
                     DaysUntilExpiry = $daysUntilExpiry
+                    Status          = if ($daysUntilExpiry -le 0) { "Expired" } else { "Expiring Soon" }
                 }
             }
         }
