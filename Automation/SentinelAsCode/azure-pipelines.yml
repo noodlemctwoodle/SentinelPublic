@@ -1,0 +1,144 @@
+trigger:
+- main  # Change this to your branch name
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: 'MSSPSentinelDeployments'
+
+# =============================================================================
+# Stage: DeployBicep
+# This stage deploys the Microsoft Sentinel infrastructure via a Bicep template.
+# =============================================================================
+stages:
+  - stage: DeployBicep
+    displayName: 'Deploy Microsoft Sentinel Infrastructure via Bicep'
+    jobs:
+      - job: DeploySentinelResources
+        displayName: 'Deploy Microsoft Sentinel Resources'
+        steps:
+          - task: AzureCLI@2
+            displayName: 'Deploy Sentinel Infrastructure with Bicep Template'
+            name: DeployBicepTask
+            inputs:
+              azureSubscription: $(azureSubscription)
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                echo "Starting Bicep Deployment..."
+                az deployment sub create \
+                  --location '$(REGION)' \
+                  --template-file Deployment/main.bicep \
+                  --parameters Deployment/main.bicepparam \
+                  --parameters rgLocation='$(REGION)' rgName='$(RESOURCEGROUP)' lawName='$(WORKSPACENAME)' dailyQuota='$(DAILYQUOTA)'
+
+# =============================================================================
+# Stage: EnableSentinelContentHub
+# This stage enables Sentinel solutions and configures alert rules.
+# It is executed only if the previous stage succeeds.
+# =============================================================================
+  - stage: EnableSentinelContentHub
+    displayName: 'Enable Sentinel Solutions and Configure Alert Rules'
+    dependsOn: DeployBicep
+    condition: succeeded()
+    jobs:
+      - job: EnableContentHub
+        displayName: 'Enable Sentinel Solutions and Alert Rules'
+        steps:
+          # Verify that the correct Sentinel Workspace Name has been retrieved.
+          - script: |
+              echo "Using Sentinel Workspace Name: $(WORKSPACENAME)"
+            displayName: "Verify Retrieved Sentinel Workspace Name"
+
+          # Execute the deployment script for all Sentinel solutions.
+          - task: PowerShell@2
+            displayName: 'Execute Sentinel Deployment Script for All Solutions'
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Define the path to the deployment script within the repository.
+                $scriptPath = "$(Build.SourcesDirectory)/DeploymentScripts/Create-NewSolutionAndRulesFromList.ps1"
+
+                # Check and install only the required Az modules for the deployment.
+                $requiredModules = @("Az.Accounts", "Az.Resources")
+                foreach ($module in $requiredModules) {
+                  if (-not (Get-Module -ListAvailable -Name $module)) {
+                    Write-Host "Installing missing module: $module"
+                    Install-Module -Name $module -Force -AllowClobber -Scope CurrentUser
+                  } else {
+                    Write-Host "Module already installed: $module"
+                  }
+                }
+
+                Import-Module Az.Accounts
+                Import-Module Az.Resources
+
+                # Authenticate to Azure using a Service Principal.
+                Write-Host "Authenticating to Azure using Service Principal..."
+                $clientSecret = ConvertTo-SecureString -String "$(clientSecret)" -AsPlainText -Force
+                $appId = "$(clientId)"
+                $tenantId = "$(tenantId)"
+                $connectCreds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $appId, $clientSecret
+
+                Connect-AzAccount -ServicePrincipal -Credential $connectCreds -Tenant $tenantId
+
+                if (-not (Get-AzContext)) {
+                  Write-Host "ERROR: Failed to authenticate to Azure using Service Principal!"
+                  exit 1
+                }
+                Write-Host "Authenticated to Azure successfully."
+
+                # Define key parameters using pipeline variables.
+                $resourceGroup = '$(RESOURCEGROUP)'
+                $workspaceName = '$(WORKSPACENAME)'
+                $region = '$(REGION)'
+
+                if (-not $workspaceName) {
+                  Write-Host "ERROR: Sentinel Workspace Name is empty!"
+                  exit 1
+                }
+                Write-Host "Using Sentinel Workspace Name: $workspaceName"
+                Write-Host "Using Resource Group: $resourceGroup"
+                Write-Host "Using Region: $region"
+
+                # Define the list of solutions to deploy.
+                $solutions = @(
+                    "Azure Activity",
+                    "Azure Key Vault",
+                    "Azure Logic Apps",
+                    "Azure Network Security Groups",
+                    "Microsoft 365",
+                    "Microsoft Defender for Cloud",
+                    "Microsoft Defender for Cloud Apps",
+                    "Microsoft Defender for Endpoint",
+                    "Microsoft Defender for Identity",
+                    "Microsoft Defender for Office 365",
+                    "Microsoft Defender Threat Intelligence",
+                    "Microsoft Defender XDR",
+                    "Microsoft Entra ID",
+                    "Microsoft Purview Insider Risk Management",
+                    "Syslog",
+                    "Threat Intelligence",
+                    "Windows Security Events",
+                    "Windows Server DNS"
+                )
+
+                # Define severities to include in the deployment.
+                $severities = @("High", "Medium", "Low")
+
+                # Loop through each solution.
+                foreach ($solution in $solutions) {
+                    # For each solution, loop through each severity.
+                    foreach ($severity in $severities) {
+                        Write-Host "Deploying solution: $solution with severity: $severity"
+                        pwsh -ExecutionPolicy Unrestricted -File $scriptPath `
+                            -ResourceGroup $resourceGroup `
+                            -Workspace $workspaceName `
+                            -Region $region `
+                            -Solutions $solution `
+                            -SeveritiesToInclude $severity
+                    }
+                    # Only once all severity deployments are complete, log the completion message.
+                    Write-Host "Deployed solution: $solution"
+                }
