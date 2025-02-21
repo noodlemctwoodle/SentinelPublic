@@ -73,7 +73,7 @@ The Azure Function uses an Event Hub output binding to forward events. Each forw
 
 ## Function Configuration
 
-function.json
+`function.json`
 
 Define the timer trigger and Event Hub output binding in the function.json file:
 
@@ -112,6 +112,39 @@ The function includes robust error-handling mechanisms:
 2. Authentication Errors: Validates credentials and retries if needed.
 3. Logging: Logs errors for failed queries, API calls, or event processing.
 4. Batch Processing Protection: Ensures incomplete batches don’t corrupt data collection.
+
+## Rate Limiting Protection
+
+The function implements rate limiting protection to handle Microsoft Graph API's throttling mechanisms:
+
+### HTTP 429 Response Handling
+
+When the Microsoft Graph API returns a HTTP 429 status code ("Too Many Requests"), the function:
+
+1. Captures the response using `$_.Exception.Response.StatusCode -eq 429`
+2. Extracts the recommended wait time from the "Retry-After" header
+3. Implements exponential backoff with a default 12-second delay if no wait time is specified
+4. Retries the request up to 3 times
+
+Example of the rate limiting code:
+```powershell
+if ($_.Exception.Response.StatusCode -eq 429) {
+    $retryAfter = 12 # Default delay if header not present
+    if ($_.Exception.Response.Headers["Retry-After"]) {
+        $retryAfter = [int]$_.Exception.Response.Headers["Retry-After"]
+    }
+    Write-Host "Rate limit encountered. Waiting $retryAfter seconds..."
+    Start-Sleep -Seconds $retryAfter
+    $retryCount++
+}
+```
+
+#### Rate Limiting Best Practices
+
+1. The function implements a 2-second delay between batch requests
+2. Respects the API's Retry-After header values
+3. Uses exponential backoff for repeated rate limit encounters
+4. Logs all rate limiting events for monitoring
 
 ## Monitoring
 

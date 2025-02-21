@@ -2,10 +2,10 @@
 # Executes on a schedule to collect Microsoft 365 Defender security events and forward them to Event Hub
 param($Timer)
 
-# Azure AD Authentication Configuration
+# Entra ID Authentication Configuration
 # Required environment variables for Microsoft Graph API authentication
-$tenantId                   = $env:TenantId      # Organization's Azure AD Directory ID
-$clientId                   = $env:ClientId      # Azure AD App Registration ID for API access
+$tenantId                   = $env:TenantId      # Organisation's Entra Directory ID
+$clientId                   = $env:ClientId      # Entra ID App Registration ID for API access
 $clientSecret              = $env:ClientSecret   # Secret key for application authentication
 
 # Query and Batch Processing Configuration
@@ -48,7 +48,7 @@ $queries = @(
 # Implements OAuth2 client credentials flow for secure API access
 function Get-GraphAuthToken {
     param (
-        [Parameter(Mandatory=$true)][string]$tenantId,     # Organization's Azure AD Directory ID
+        [Parameter(Mandatory=$true)][string]$tenantId,     # Organisation's Entra Directory ID
         [Parameter(Mandatory=$true)][string]$clientId,     # App Registration ID
         [Parameter(Mandatory=$true)][string]$clientSecret  # App Registration secret
     )
@@ -62,7 +62,7 @@ function Get-GraphAuthToken {
     }
 
     try {
-        # Request OAuth2 access token from Azure AD endpoint
+        # Request OAuth2 access token from Entra ID endpoint
         $response = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$tenantId/oauth2/v2.0/token" -Body $authBody -ContentType 'application/x-www-form-urlencoded'
         return $response.access_token
     } catch {
