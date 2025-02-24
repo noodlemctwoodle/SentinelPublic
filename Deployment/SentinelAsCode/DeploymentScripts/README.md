@@ -74,7 +74,11 @@ This script automates the deployment of Microsoft Sentinel solutions and analyti
         "Low"
     )
 
-   .\Deploy-Sentinel.ps1 -ResourceGroup "YourRG" -Workspace "YourWorkspace" -Region "YourRegion" -Solutions "Solution1","Solution2" -SeveritiesToInclude "High","Medium","Low"
+   .\Create-SentinelSolutions.ps1 -ResourceGroup "YourRG" -Workspace "YourWorkspace" -Region "YourRegion" -Solutions "Solution1","Solution2" -SeveritiesToInclude "High","Medium","Low"
+   ```
+
+   ```PowerShell
+   .\Create-SentinelSolutions.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium"
    ```
 
 3. The script will:

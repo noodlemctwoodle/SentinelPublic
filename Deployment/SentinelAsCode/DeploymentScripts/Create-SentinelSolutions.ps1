@@ -33,12 +33,12 @@
 
 .EXAMPLE
 
-    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium"
+    .\Create-SentinelSolutions.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium"
 
     Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents.
 
 .EXAMPLE
-    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium" -IsGov $true
+    .\Create-SentinelSolutions.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium" -IsGov $true
 
     Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents in an Azure Government cloud environment.
 #>
