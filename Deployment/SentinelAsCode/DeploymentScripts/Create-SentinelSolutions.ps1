@@ -260,22 +260,31 @@ function Deploy-Solutions {
 
 ### Function: Deploy Analytical Rules ###
 function Deploy-AnalyticalRules {
-    Write-Host "Fetching available Analytical Rule templates..." -ForegroundColor Yellow
-
-    # Ensure `api-version` is included in the API request
-    $solutionURL = "$baseUri/providers/Microsoft.SecurityInsights/contentTemplates?api-version=2023-05-01-preview"
-    $solutionURL += "&%24filter=(properties%2FcontentKind%20eq%20'AnalyticsRule')"
+    Write-Host "Fetching available Sentinel solutions..." -ForegroundColor Yellow
+    $solutionURL = "$baseUri/providers/Microsoft.SecurityInsights/contentProductPackages?api-version=2024-03-01"
 
     try {
-        $results = (Invoke-RestMethod -Uri $solutionURL -Method Get -Headers $authHeader).value
-        Write-Host "Successfully fetched Analytical Rule templates." -ForegroundColor Green
+        $allSolutions = (Invoke-RestMethod -Method "Get" -Uri $solutionURL -Headers $authHeader).value
+        Write-Host "Successfully fetched Sentinel solutions." -ForegroundColor Green
     } catch {
-        Write-Error "ERROR: Failed to fetch Analytical Rule templates: $($_.Exception.Message)"
+        Write-Error "Failed to fetch Sentinel solutions: $($_.Exception.Message)"
+        return
+    }
+
+    Write-Host "Fetching available Analytical Rule templates..." -ForegroundColor Yellow
+    $ruleTemplateURL = "$baseUri/providers/Microsoft.SecurityInsights/contentTemplates?api-version=2023-05-01-preview"
+    $ruleTemplateURL += "&%24filter=(properties%2FcontentKind%20eq%20'AnalyticsRule')"
+
+    try {
+        $results = (Invoke-RestMethod -Uri $ruleTemplateURL -Method Get -Headers $authHeader).value
+        Write-Host "Successfully fetched $($results.Count) Analytical Rule templates." -ForegroundColor Green
+    } catch {
+        Write-Error "Failed to fetch Analytical Rule templates: $($_.Exception.Message)"
         return
     }
 
     if ($null -eq $results -or $results.Count -eq 0) {
-        Write-Error "ERROR: No Analytical Rule templates found! Exiting."
+        Write-Error "No Analytical Rule templates found! Exiting."
         return
     }
 
@@ -285,38 +294,27 @@ function Deploy-AnalyticalRules {
     Write-Host "Severities to include: $SeveritiesToInclude" -ForegroundColor Magenta
 
     foreach ($result in $results) {
+        $displayName = $result.properties.mainTemplate.resources.properties[0].displayName
         $severity = $result.properties.mainTemplate.resources.properties[0].severity
 
-        if ($SeveritiesToInclude.Contains($severity)) {
-            $displayName = $result.properties.mainTemplate.resources.properties[0].displayName
-            
+        if ($SeveritiesToInclude.Count -eq 0 -or $SeveritiesToInclude.Contains($severity)) {
+
+            #Write-Host "Deploying Analytical Rule: $displayName" -ForegroundColor Cyan
+
             # **Skip deprecated rules**
             if ($displayName -match "\[Deprecated\]") {
                 Write-Warning "Skipping Deprecated Rule: $displayName"
                 continue
             }
 
-            #Write-Host "Deploying Analytical Rule: $displayName"
-
             $templateVersion = $result.properties.mainTemplate.resources.properties[1].version
-
-            # Extract kind from the template
-            if ($result.properties.mainTemplate.resources[0].kind) {
-                $kind = $result.properties.mainTemplate.resources[0].kind
-            } elseif ($result.properties.mainTemplate.resources.kind) {
-                $kind = $result.properties.mainTemplate.resources.kind
-            } else {
-                Write-Error "ERROR: Unable to determine kind for $displayName"
-                continue
-            }
-
-            # Get the properties and enable the rule
+            $kind = $result.properties.mainTemplate.resources[0].kind
             $properties = $result.properties.mainTemplate.resources[0].properties
             $properties.enabled = $true
 
             # Add linking fields
             $properties | Add-Member -NotePropertyName "alertRuleTemplateName" -NotePropertyValue $result.properties.mainTemplate.resources[0].name
-            $properties | Add-Member -NotePropertyName "templateVersion" -NotePropertyValue $result.properties.mainTemplate.resources[1].properties.version
+            $properties | Add-Member -NotePropertyName "templateVersion" -NotePropertyValue $templateVersion
 
             # Ensure entityMappings is an array
             if ($properties.PSObject.Properties.Name -contains "entityMappings") {
@@ -335,22 +333,21 @@ function Deploy-AnalyticalRules {
             # Fix Grouping Configuration 
             if ($properties.PSObject.Properties.Name -contains "incidentConfiguration") {
                 if ($properties.incidentConfiguration.PSObject.Properties.Name -contains "groupingConfiguration") {
-                    
+
                     if (-not $properties.incidentConfiguration.groupingConfiguration) {
-                        # If groupingConfiguration is missing, create it with default values
                         $properties.incidentConfiguration | Add-Member -NotePropertyName "groupingConfiguration" -NotePropertyValue @{
                             matchingMethod = "AllEntities"
                             lookbackDuration = "PT1H"
                         }
                         Write-Host "DEBUG: Created missing groupingConfiguration with default values (matchingMethod='AllEntities', lookbackDuration='PT1H')" -ForegroundColor Cyan
                     } else {
-                        # If matchingMethod is missing, set default
+                        # Ensure `matchingMethod` exists
                         if (-not ($properties.incidentConfiguration.groupingConfiguration.PSObject.Properties.Name -contains "matchingMethod")) {
                             $properties.incidentConfiguration.groupingConfiguration | Add-Member -NotePropertyName "matchingMethod" -NotePropertyValue "AllEntities"
                             Write-Host "DEBUG: Added missing matchingMethod='AllEntities' to groupingConfiguration" -ForegroundColor Cyan
                         }
-            
-                        # Handle lookback Duration formatting
+
+                        # Ensure `lookbackDuration` is in ISO 8601 format
                         if ($properties.incidentConfiguration.groupingConfiguration.PSObject.Properties.Name -contains "lookbackDuration") {
                             $lookbackDuration = $properties.incidentConfiguration.groupingConfiguration.lookbackDuration
                             if ($lookbackDuration -match "^(\d+)(h|d|m)$") {
@@ -364,16 +361,8 @@ function Deploy-AnalyticalRules {
                                 $properties.incidentConfiguration.groupingConfiguration.lookbackDuration = $isoDuration
                                 Write-Host "DEBUG: Converted lookbackDuration '$lookbackDuration' to ISO 8601 format: '$isoDuration'" -ForegroundColor Cyan
                             }
-                        } else {
-                            # If lookbackDuration is missing, set default
-                            $properties.incidentConfiguration.groupingConfiguration | Add-Member -NotePropertyName "lookbackDuration" -NotePropertyValue "PT1H"
-                            Write-Host "DEBUG: Added missing lookbackDuration='PT1H' to groupingConfiguration" -ForegroundColor Cyan
                         }
                     }
-            
-                    # Final Debugging Output
-                    Write-Host "DEBUG: Final groupingConfiguration:" -ForegroundColor Cyan
-                    Write-Host ($properties.incidentConfiguration.groupingConfiguration | ConvertTo-Json -Depth 10)
                 }
             }
 
@@ -386,26 +375,27 @@ function Deploy-AnalyticalRules {
             $guid = (New-Guid).Guid
             $alertUri = "$BaseAlertUri$guid" + "?api-version=2022-12-01-preview"
 
-            #Write-Host "Attempting to create rule: $displayName"
-
             try {
                 $jsonBody = $body | ConvertTo-Json -Depth 50 -Compress
                 $verdict = Invoke-RestMethod -Uri $alertUri -Method Put -Headers $authHeader -Body $jsonBody
                 Write-Host "Successfully deployed rule: $displayName" -ForegroundColor Green
 
-                # Extract source details from `allSolutions`
-                $solution = $allSolutions.properties | Where-Object -Property "contentId" -Contains $result.properties.packageId
-                $sourceName = if ($solution -and $solution.PSObject.Properties.Name -contains "source") {
-                    $solution.source.name
+                # **Correct Source Name Lookup**
+                $solution = $allSolutions | Where-Object { 
+                    ($_.properties.contentId -eq $result.properties.packageId) -or 
+                    ($_.properties.packageId -eq $result.properties.packageId)
+                } | Select-Object -First 1
+
+                if ($solution) {
+                    $sourceName = $solution.properties.displayName
+                    $sourceId = $solution.name
                 } else {
-                    "Unknown Source"
-                }
-                $sourceId = if ($solution -and $solution.PSObject.Properties.Name -contains "sourceId") {
-                    $solution.source.sourceId
-                } else {
-                    "Unknown-ID"
+                    $sourceName = "Unknown Solution"
+                    $sourceId = "Unknown-ID"
+                    Write-Warning "No matching solution found for: $displayName"
                 }
 
+                # **Create metadata**
                 $metaBody = @{
                     "apiVersion" = "2022-01-01-preview"
                     "name"       = "analyticsrule-" + $verdict.name
@@ -424,9 +414,9 @@ function Deploy-AnalyticalRules {
                     }
                 }
 
+                # metadata update
                 $metaUri = "$BaseMetaURI$($verdict.name)?api-version=2022-01-01-preview"
                 Invoke-RestMethod -Uri $metaUri -Method Put -Headers $authHeader -Body ($metaBody | ConvertTo-Json -Depth 5 -Compress) | Out-Null
-                #Write-Output "Metadata update completed for rule: $displayName"
 
             } catch {
                 if ($_.ErrorDetails.Message -match "One of the tables does not exist") {
@@ -436,7 +426,7 @@ function Deploy-AnalyticalRules {
                 } elseif ($_.ErrorDetails.Message -match "FailedToResolveScalarExpression|SemanticError") {
                     Write-Warning "Skipping $displayName due to an invalid expression in the query."
                 } else {
-                    Write-Error "ERROR: Deployment failed for Analytical Rule: $displayName"
+                    Write-Error "Deployment failed for Analytical Rule: $displayName"
                     Write-Error "Azure API Error: $($_.ErrorDetails.Message)"
                 }
             }
