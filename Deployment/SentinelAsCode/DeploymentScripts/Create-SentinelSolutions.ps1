@@ -211,7 +211,7 @@ function Deploy-Solutions {
 
         $deploymentName = "allinone-$($solution.name)".Substring(0, [Math]::Min(64, ("allinone-$($solution.name)").Length))
 
-        # Ensure `api-version` is correctly formatted in the URL
+        # Format `api-version` in the URL
         $installURL = "$serverUrl/subscriptions/$SubscriptionId/resourcegroups/$ResourceGroup/providers/Microsoft.Resources/deployments/$deploymentName"
         $installURL = $installURL + "?api-version=2021-04-01"
 
@@ -380,7 +380,7 @@ function Deploy-AnalyticalRules {
                 $verdict = Invoke-RestMethod -Uri $alertUri -Method Put -Headers $authHeader -Body $jsonBody
                 Write-Host "Successfully deployed rule: $displayName" -ForegroundColor Green
 
-                # **Correct Source Name Lookup**
+                # Source Name Lookup
                 $solution = $allSolutions | Where-Object { 
                     ($_.properties.contentId -eq $result.properties.packageId) -or 
                     ($_.properties.packageId -eq $result.properties.packageId)
@@ -395,7 +395,7 @@ function Deploy-AnalyticalRules {
                     Write-Warning "No matching solution found for: $displayName"
                 }
 
-                # **Create metadata**
+                # Create metadata
                 $metaBody = @{
                     "apiVersion" = "2022-01-01-preview"
                     "name"       = "analyticsrule-" + $verdict.name
