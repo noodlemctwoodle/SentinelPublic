@@ -64,12 +64,12 @@ Below are the pipeline variables shown in the attached image and how they might 
 | **arSeverities**      | `"High","Medium","Low"`                                                | List of severities to include when deploying analytical rules.                                      |
 | **clientId**          | `00000000-0000-0000-0000-000000000000`                                | The Azure AD App (Service Principal) Client ID.                                                      |
 | **clientSecret**      | `************`                                                         | The secret key for your Service Principal.                                                           |
-| **DailyQuota**        | `10`                                                                   | Daily ingestion quota (used by some scripts or environment settings, if applicable).                 |
-| **Region**            | `uksouth`                                                              | Azure region in which the Sentinel workspace is located.                                            |
-| **ResourceGroup**     | `ResourceGroupName`                                                       | The name of the Resource Group that contains (or will contain) the Sentinel workspace.               |
+| **dailyQuota**        | `10`                                                                   | Daily ingestion quota (used by some scripts or environment settings, if applicable).                 |
+| **region**            | `uksouth`                                                              | Azure region in which the Sentinel workspace is located.                                            |
+| **resourceGroup**     | `ResourceGroupName`                                                       | The name of the Resource Group that contains (or will contain) the Sentinel workspace.               |
 | **sentinelSolutions** | `"Azure Activity","Azure Key Vault","Azure Logic Apps","..."`          | A list of Sentinel solutions to deploy from the Content Hub.                                         |
 | **tenantId**          | `00000000-0000-0000-0000-000000000000`                                | The Azure AD tenant ID where Sentinel is hosted.                                                     |
-| **WorkspaceName**     | `LogAnalyticsWorkspaceName`                                                    | The name of the Sentinel workspace to which solutions and rules are deployed.                        |
+| **workspaceName**     | `LogAnalyticsWorkspaceName`                                                    | The name of the Sentinel workspace to which solutions and rules are deployed.                        |
 
 ### Example Usage in YAML
 
