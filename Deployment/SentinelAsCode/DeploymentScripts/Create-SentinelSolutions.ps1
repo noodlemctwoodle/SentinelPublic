@@ -43,51 +43,6 @@
     Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents in an Azure Government cloud environment.
 #>
 
-<#
-.SYNOPSIS
-    Deploys Microsoft Sentinel Solutions and Analytical Rules to a specified Azure Sentinel workspace.
-
-.DESCRIPTION
-    This PowerShell script automates the deployment of Microsoft Sentinel solutions and analytical rules
-    from the Content Hub into an Azure Sentinel workspace. It ensures only relevant rules are deployed
-    by filtering based on severity, handling missing tables, deprecated rules, and unsupported configurations.
-
-.PARAMETER ResourceGroup
-    The name of the Azure Resource Group where the Sentinel workspace is located.
-
-.PARAMETER Workspace
-    The name of the Sentinel (Log Analytics) workspace.
-
-.PARAMETER Region
-    The Azure region where the workspace is deployed.
-
-.PARAMETER Solutions
-    An array of Microsoft Sentinel solutions to deploy.
-
-.PARAMETER SeveritiesToInclude
-    An optional list of rule severities to include (e.g. High, Medium, Low).
-
-.PARAMETER IsGov
-    Specifies whether the script should target an Azure Government cloud.
-
-.NOTES
-    Author: noodlemctwoodle
-    Version: 2.0
-    Last Updated: 24/02/2025
-    GitHub Repository: SentinelPublic
-
-.EXAMPLE
-
-    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium"
-
-    Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents.
-
-.EXAMPLE
-    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium" -IsGov $true
-
-    Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents in an Azure Government cloud environment.
-#>
-
 param(
     [Parameter(Mandatory = $true)][string]$ResourceGroup,
     [Parameter(Mandatory = $true)][string]$Workspace,
@@ -264,9 +219,12 @@ function Deploy-Solutions {
 
 #
 function Deploy-AnalyticalRules {
+
+    #
     Write-Host "Waiting for Sentinel to finalize content updates before retrieving Analytical Rules..."
     Start-Sleep -Seconds 90  # Adjust if needed
 
+    #
     Write-Host "Fetching available Sentinel solutions..." -ForegroundColor Yellow
     $solutionURL = "$baseUri/providers/Microsoft.SecurityInsights/contentProductPackages?api-version=2024-03-01"
     
