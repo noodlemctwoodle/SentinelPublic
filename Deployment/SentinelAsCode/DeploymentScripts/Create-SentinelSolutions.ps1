@@ -43,14 +43,64 @@
     Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents in an Azure Government cloud environment.
 #>
 
+<#
+.SYNOPSIS
+    Deploys Microsoft Sentinel Solutions and Analytical Rules to a specified Azure Sentinel workspace.
+
+.DESCRIPTION
+    This PowerShell script automates the deployment of Microsoft Sentinel solutions and analytical rules
+    from the Content Hub into an Azure Sentinel workspace. It ensures only relevant rules are deployed
+    by filtering based on severity, handling missing tables, deprecated rules, and unsupported configurations.
+
+.PARAMETER ResourceGroup
+    The name of the Azure Resource Group where the Sentinel workspace is located.
+
+.PARAMETER Workspace
+    The name of the Sentinel (Log Analytics) workspace.
+
+.PARAMETER Region
+    The Azure region where the workspace is deployed.
+
+.PARAMETER Solutions
+    An array of Microsoft Sentinel solutions to deploy.
+
+.PARAMETER SeveritiesToInclude
+    An optional list of rule severities to include (e.g. High, Medium, Low).
+
+.PARAMETER IsGov
+    Specifies whether the script should target an Azure Government cloud.
+
+.NOTES
+    Author: noodlemctwoodle
+    Version: 2.0
+    Last Updated: 24/02/2025
+    GitHub Repository: SentinelPublic
+
+.EXAMPLE
+
+    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium"
+
+    Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents.
+
+.EXAMPLE
+    .\Deploy-Sentinel.ps1 -ResourceGroup "Security-RG" -Workspace "MySentinelWorkspace" -Region "East US" -Solutions "Microsoft Defender XDR", "Microsoft 365" -SeveritiesToInclude "High", "Medium" -IsGov $true
+
+    Deploys "Microsoft Defender XDR" and "Microsoft 365" Sentinel solutions while filtering analytical rules to include only "High" and "Medium" severity incidents in an Azure Government cloud environment.
+#>
+
 param(
     [Parameter(Mandatory = $true)][string]$ResourceGroup,
     [Parameter(Mandatory = $true)][string]$Workspace,
     [Parameter(Mandatory = $true)][string]$Region,
     [Parameter(Mandatory = $true)][string[]]$Solutions,
     [Parameter(Mandatory = $false)][string[]]$SeveritiesToInclude = @("High", "Medium", "Low"),  # Default severities
-    [Parameter(Mandatory = $false)][bool]$IsGov = $false
+    [Parameter(Mandatory = $false)][string]$IsGov = "false"  # Changed from [bool] to [string]
 )
+
+# Convert the string value to Boolean
+$IsGov = ($IsGov -eq 'true' -or $IsGov -eq '1')
+
+Write-Host "GovCloud Mode: $IsGov"
 
 # Ensure parameters are always treated as arrays
 if ($Solutions -isnot [array]) { $Solutions = @($Solutions) }
@@ -165,39 +215,48 @@ function Deploy-Solutions {
         $installURL = "$serverUrl/subscriptions/$SubscriptionId/resourcegroups/$ResourceGroup/providers/Microsoft.Resources/deployments/$deploymentName"
         $installURL = $installURL + "?api-version=2021-04-01"
 
-        #Write-Host "Starting deployment: $deploymentName"
-
-        # Start deployment in parallel
+        # Start deployment in parallel and pass $deploySolution for error reporting
         $job = Start-Job -ScriptBlock {
-            param ($installURL, $installBody, $authHeader, $deploymentName)
+            param ($installURL, $installBody, $authHeader, $deploymentName, $solutionDisplayName)
             try {
                 Invoke-RestMethod -Uri $installURL -Method Put -Headers $authHeader -Body ($installBody | ConvertTo-Json -EnumsAsStrings -Depth 50 -EscapeHandling EscapeNonAscii) | Out-Null
                 Write-Host "Deployment successful: $deploymentName" -ForegroundColor Green
             } catch {
                 $ErrorResponse = $_
                 $RawError = $ErrorResponse.ErrorDetails.Message
-
-                Write-Error "ERROR: Deployment failed for: $deploymentName"
-
-                # Print only the first 300 characters of the error message for pipeline readability
+                Write-Error "ERROR: Deployment failed for solution: $solutionDisplayName (Deployment: $deploymentName)"
                 if ($RawError) {
                     Write-Error "Azure API Error: $($RawError.Substring(0, [Math]::Min(300, $RawError.Length)))"
                 }
-
-                # Save full response to log file for debugging
-                $RawError | Out-File -FilePath "SentinelDeploymentError.log" -Append
             }
-        } -ArgumentList $installURL, $installBody, $authHeader, $deploymentName
+        } -ArgumentList $installURL, $installBody, $authHeader, $deploymentName, $deploySolution
 
-        $jobs += $job
-        Start-Sleep -Milliseconds 250  # Prevent Azure API throttling
+        # Store the job and the corresponding solution name
+        $jobs += [PSCustomObject]@{
+            Job      = $job
+            Solution = $deploySolution
+        }
+        # Increased delay to mitigate potential rate limiting
+        Start-Sleep -Milliseconds 1000
     }
 
-    # Wait for all deployments to complete
-    $jobs | ForEach-Object { Receive-Job -Job $_ -Wait }
-    Write-Host "All Sentinel solutions have been deployed." -ForegroundColor Blue
+    # Wait for all deployments to complete with enhanced error handling and output failed solution names
+    $failedJobs = @()
+    foreach ($jobObject in $jobs) {
+        try {
+            Receive-Job -Job $jobObject.Job -Wait -ErrorAction Stop
+        } catch {
+            $failedJobs += $jobObject
+            Write-Warning "Deployment failed for solution: $($jobObject.Solution)"
+        }
+    }
+    if ($failedJobs.Count -gt 0) {
+        Write-Error "Some deployments failed. Please review logs."
+        exit 1
+    } else {
+        Write-Host "All Sentinel solutions have been deployed." -ForegroundColor Blue
+    }
 }
-
 
 ### Function: Deploy Analytical Rules ###
 function Deploy-AnalyticalRules {
