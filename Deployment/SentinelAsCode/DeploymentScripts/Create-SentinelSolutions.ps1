@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Deploys Microsoft Sentinel Solutions and Analytical Rules to a specified Azure Sentinel workspace.
+    Deploys Microsoft Sentinel Solutions and Analytical Rules to a specified Microsoft Sentinel workspace.
 
 .DESCRIPTION
     This PowerShell script automates the deployment of Microsoft Sentinel solutions and analytical rules
