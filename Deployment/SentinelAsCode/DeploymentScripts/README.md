@@ -26,6 +26,28 @@ This script automates the deployment of Microsoft Sentinel solutions and analyti
 - **Dynamic Resource Handling**: Automatically processes packaged content for seamless deployments.
 - **Error Handling**: Solutions not found in the Content Hub are skipped with a warning instead of failing the script.
 
+### Tested with these Solutions
+
+- Azure Activity
+- Azure Key Vault
+- Azure Logic Apps
+- Azure Network Security Groups
+- Microsoft 365
+- Microsoft Defender for Cloud
+- Microsoft Defender for Cloud Apps
+- Microsoft Defender for Endpoint
+- Microsoft Defender for Identity
+- Microsoft Defender Threat Intelligence
+- Microsoft Defender XDR
+- Microsoft Entra ID
+- Microsoft Purview Insider Risk Management
+- Syslog
+- Threat Intelligence
+- Windows Security Events
+- Windows Server DNS
+
+"Azure Activity","Azure Key Vault","Azure Logic Apps","Azure Network Security Groups","Microsoft 365","Microsoft Defender for Cloud","Microsoft Defender for Cloud Apps","Microsoft Defender for Endpoint","Microsoft Defender for Identity","Microsoft Defender Threat Intelligence","Microsoft Defender XDR","Microsoft Entra ID","Microsoft Purview Insider Risk Management","Syslog","Threat Intelligence","Windows Security Events","Windows Server DNS"
+
 ### Analytical Rule Enhancements
 
 - **Deprecated Rules Handling**: Deprecated rules are skipped with a warning message.
