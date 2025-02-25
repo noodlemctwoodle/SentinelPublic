@@ -301,7 +301,7 @@ function Deploy-AnalyticalRules {
 
             #Write-Host "Deploying Analytical Rule: $displayName" -ForegroundColor Cyan
 
-            # **Skip deprecated rules**
+            # Skip deprecated rules
             if ($displayName -match "\[Deprecated\]") {
                 Write-Warning "Skipping Deprecated Rule: $displayName"
                 continue
