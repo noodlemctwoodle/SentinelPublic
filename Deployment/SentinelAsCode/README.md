@@ -33,8 +33,6 @@ The following variables can be set in your Azure DevOps pipeline. The example va
 | Variable Name         | Example Value                       | Description                                                                                         |
 |-----------------------|-------------------------------------|-----------------------------------------------------------------------------------------------------|
 | **arSeverities**      | `"High","Medium","Low"`             | List of severities to include when deploying analytical rules.                                      |
-| **clientId**          | `00000000-0000-0000-0000-000000000000`| The Azure AD App (Service Principal) Client ID.                                                   |
-| **clientSecret**      | `************`                      | The secret key for your Service Principal.                                                        |
 | **dailyQuota**        | `10`                                | Daily ingestion quota (used by some scripts or environment settings, if applicable).                |
 | **region**            | `uksouth`                           | Azure region in which the Sentinel workspace is located.                                           |
 | **resourceGroup**     | `ResourceGroupName`                 | The name of the Resource Group that contains (or will contain) the Sentinel workspace.              |
